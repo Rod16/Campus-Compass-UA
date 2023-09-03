@@ -1,0 +1,7 @@
+{
+  "name": "campus-compass",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
