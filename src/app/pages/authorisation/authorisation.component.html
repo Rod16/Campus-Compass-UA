@@ -1,0 +1,27 @@
+<ion-content [fullscreen]="true">
+  <div class="d-flex align-items-center h-100vh non-scrollable">
+    <div class="position-relative" [ngClass]="sharedService.getScreenWidth().valueOf() > 1000 ? 'w-50' : 'w-100'">
+      <div class="d-flex align-items-center flex-column w-100 position-absolute centered-vertically">
+        <ion-text color="dark">{{sharedService.getScreenWidth()}}</ion-text>
+        <ion-text color="dark" class="mb-5 t1">Sign In</ion-text>
+        <div [formGroup]="authForm" class="centered-input">
+          <ion-input placeholder="Email" formControlName="email" class="text-input mb-2"></ion-input>
+          <app-password-field class="mb-5 text-input">
+            <ion-input type="password" placeholder="Password" formControlName="password"></ion-input>
+          </app-password-field>
+        </div>
+        <ion-button (click)="signIn()" color="primary" shape="round" class="centered-button mb-2">Sign in</ion-button>
+        <ion-text [routerLink]="'registration-form'" color="secondary" class="l1 cursor-pointer">Registration Request Form</ion-text>
+      </div>
+    </div>
+    <div *ngIf="sharedService.getScreenWidth().valueOf() > 1000" class="w-50">
+      <img
+        src="/assets/images/auth-logo.svg"
+        width="100%"
+        height="{{sharedService.getScreenHeight()}}"
+        alt="The Wisconsin State Capitol building in Madison, WI at night"
+        style="object-fit: fill"
+      />
+    </div>
+  </div>
+</ion-content>

@@ -1,0 +1,36 @@
+.d-flex {
+  display: flex;
+}
+.align-items-center {
+  align-items: center;
+}
+.justify-content-center {
+  justify-content: center;
+}
+.flex-column {
+  flex-direction: column;
+}
+.position-absolute {
+  position: absolute;
+}
+.position-relative {
+  position: relative;
+}
+.top-50 {
+  top: 50%;
+}
+.top-0 {
+  top: 0;
+}
+.top-30 {
+  top: 30%;
+}
+.bottom-0 {
+  bottom: 0;
+}
+.bottom-50 {
+  bottom: 50%;
+}
+.non-scrollable {
+  overflow: hidden;
+}
