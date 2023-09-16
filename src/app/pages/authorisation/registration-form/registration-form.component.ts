@@ -21,7 +21,7 @@ export class RegistrationFormComponent implements OnInit {
     // this.auth.authState.subscribe((user) => {
     //   if (user) {
     //     this.zone.run(() => {
-    //       this.router.navigate(["home"]);
+    //       this.router.navigate(["student"]);
     //     });
     //   }
     // });
@@ -31,7 +31,7 @@ export class RegistrationFormComponent implements OnInit {
     this.auth
       .signInWithEmailAndPassword(this.authForm.get('email')?.value as string, this.authForm.get('password')?.value as string)
       .then(() => {
-        this.router.navigate(["home"]);
+        this.router.navigate(["student"]);
       })
       .catch((error: any) => {
         alert(error.message);
