@@ -22,7 +22,7 @@ export class StudentGradeComponent implements OnInit {
     this.route.data.subscribe((details: Data) => {
       (details['userInfo'] as QuerySnapshot<IUserInfo>).forEach(doc => {
         this.userInfo = doc.data() as IUserInfo;
-        documentKey = `${this.userInfo.university}-${this.userInfo.faculty}-${this.userInfo.group}-${this.userInfo.uid}`;
+        documentKey = `${this.userInfo.university}-${this.userInfo.faculty}-${this.userInfo.group}-${this.userInfo.uid}-grades`;
         this.studentService.getStudentData().subscribe((doc) => {
           doc.docs.forEach((item) => {
             if (item.id.startsWith(documentKey)) {

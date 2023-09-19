@@ -1,5 +1,5 @@
 export interface IStudentData {
-  discipline: string;
+  subject: string;
   grades: IGrade[];
 }
 

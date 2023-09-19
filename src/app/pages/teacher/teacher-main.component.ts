@@ -4,7 +4,7 @@ import {QuerySnapshot} from "@angular/fire/compat/firestore";
 import {IUserInfo} from "../../shared/interfaces/user-info";
 
 @Component({
-  selector: 'app-student',
+  selector: 'app-teacher',
   templateUrl: 'teacher-main.component.html',
   styleUrls: ['teacher-main.component.scss'],
 })

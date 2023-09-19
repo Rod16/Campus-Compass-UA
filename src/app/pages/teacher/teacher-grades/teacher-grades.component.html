@@ -1,0 +1,37 @@
+<ion-content [fullscreen]="true" *ngIf="studentData">
+  <div *ngFor="let subject of studentData.subjectsArray">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>{{subject.subjectName}}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <div *ngIf="!subject.groups || subject.groups?.length === 0">
+          <p>There are no groups for this subject</p>
+        </div>
+        <div *ngIf="subject.groups && subject.groups.length > 0">
+          <p>Groups:</p>
+          <div *ngFor="let group of subject.groups">
+            <p>{{group}}</p>
+<!--            <div *ngIf="(extractStudentByGroup(group) | async) as groupStudents">-->
+<!--              <ion-list>-->
+<!--                <ion-item *ngFor="let student of groupStudents.docs">-->
+<!--                  <ion-label>{{student.data().name}}</ion-label>-->
+<!--                </ion-item>-->
+<!--              </ion-list>-->
+<!--            </div>-->
+          </div>
+        </div>
+        <div *ngIf="subject.individualStudents">
+          <p>Individual students:</p>
+          <div>
+          <div>
+<!--              <div *ngFor="let student of (teacherService.getIndividualStudentData(subject.individualStudents) | async)?.docs">-->
+<!--                <p>{{student}}</p>-->
+<!--              </div>-->
+          </div>
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>
