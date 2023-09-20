@@ -12,23 +12,12 @@
           <p>Groups:</p>
           <div *ngFor="let group of subject.groups">
             <p>{{group}}</p>
-<!--            <div *ngIf="(extractStudentByGroup(group) | async) as groupStudents">-->
-<!--              <ion-list>-->
-<!--                <ion-item *ngFor="let student of groupStudents.docs">-->
-<!--                  <ion-label>{{student.data().name}}</ion-label>-->
-<!--                </ion-item>-->
-<!--              </ion-list>-->
-<!--            </div>-->
           </div>
         </div>
         <div *ngIf="subject.individualStudents">
           <p>Individual students:</p>
-          <div>
-          <div>
-<!--              <div *ngFor="let student of (teacherService.getIndividualStudentData(subject.individualStudents) | async)?.docs">-->
-<!--                <p>{{student}}</p>-->
-<!--              </div>-->
-          </div>
+          <div *ngFor="let student of individualStudentsArray">
+            <p [routerLink]="subject.subjectName + '/' + student.faculty + '/' + student.group + '/' + student.uid">{{student.name}}</p>
           </div>
         </div>
       </ion-card-content>

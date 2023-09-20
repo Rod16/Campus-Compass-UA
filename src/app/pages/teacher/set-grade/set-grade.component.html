@@ -1,0 +1,17 @@
+<ion-content [fullscreen]="true">
+  <div *ngIf="studentData">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>{{studentData.subject}}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-list>
+          <ion-item *ngFor="let grade of studentData.grades">
+            <ion-label>{{grade.title}}</ion-label>
+            <ion-label>{{grade.mark}}</ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

@@ -17,14 +17,13 @@ import {Firestore} from "@angular/fire/firestore";
 export class TeacherGradesComponent extends BaseComponent implements OnInit {
   public userInfo!: IUserInfo;
   public studentData!: ISubjectStudentsList;
-  notifier = new Subject()
+  public individualStudentsArray: IUserInfo[] = [];
 
   constructor(private route: ActivatedRoute, public teacherService: TeacherService, private studentService: StudentService, private fireStore: AngularFirestore) {
     super();
   }
 
   ngOnInit() {
-
     super.unsubscribeOnComponentDestroy(this.route.data).pipe(
       switchMap((details: Data) => {
         const userInfoDocs = details['userInfo'] as QuerySnapshot<IUserInfo>;
@@ -59,20 +58,16 @@ export class TeacherGradesComponent extends BaseComponent implements OnInit {
       if (studentData) {
         console.log('Student Data:', studentData);
         studentData.subjectsArray.forEach((item) => {
-          const query = this.fireStore.collection<IUserInfo>('user-info', ref =>
-            ref.where('uid', 'in', item.individualStudents));
-          query.get().subscribe((doc) => {
-            console.log('Student Data:', doc.docs.map((item) => item.data() as IUserInfo));
+          super.unsubscribeOnComponentDestroy(this.teacherService.getIndividualStudents(item.individualStudents as string[])).subscribe((doc) => {
+            doc.docs.forEach((item) => {
+              this.individualStudentsArray.push(item.data() as IUserInfo);
+            });
           });
         })
       } else {
         console.log('Student Data is not available.');
       }
     });
-  }
-
-  public extractStudentByGroup(group: string) {
-    return this.teacherService.filterStudentsByGroup(group)
   }
 
 }

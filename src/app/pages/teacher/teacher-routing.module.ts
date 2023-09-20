@@ -5,6 +5,8 @@ import {UserBasicDataResolver} from "../../shared/resolvers/user-basic-data.reso
 import {TeacherInfoComponent} from "./teacher-info/teacher-info.component";
 import {StudentGradeComponent} from "../student/student-grade/student-grade.component";
 import {TeacherGradesComponent} from "./teacher-grades/teacher-grades.component";
+import {StudentGradeResolver} from "./resolvers/student-grade.resolver";
+import {SetGradeComponent} from "./set-grade/set-grade.component";
 
 const routes: Routes = [
   {
@@ -15,10 +17,11 @@ const routes: Routes = [
     },
     children: [
       {
-        path: ':id',
-        component: TeacherInfoComponent,
+        path: ':id/grades/:subject/:faculty/:group/:uid',
+        component: SetGradeComponent,
         resolve: {
-          userInfo: UserBasicDataResolver
+          userInfo: UserBasicDataResolver,
+          studentGrade: StudentGradeResolver
         },
       },
       {
@@ -27,7 +30,14 @@ const routes: Routes = [
         resolve: {
           userInfo: UserBasicDataResolver
         },
-      }
+      },
+      {
+        path: ':id',
+        component: TeacherInfoComponent,
+        resolve: {
+          userInfo: UserBasicDataResolver
+        },
+      },
     ]
   }
 ];
