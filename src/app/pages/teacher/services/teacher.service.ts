@@ -1,9 +1,6 @@
 import {Injectable} from "@angular/core";
-import {collection, collectionData, getFirestore, where} from "@angular/fire/firestore";
-import {initializeApp} from "@angular/fire/app";
 import {AngularFirestore} from "@angular/fire/compat/firestore";
 import {IUserInfo} from "../../../shared/interfaces/user-info";
-import {IStudentData} from "../../../shared/interfaces/student-data";
 import {IGradeParams} from "../interfaces/grade-params";
 
 @Injectable({providedIn: 'root'})
