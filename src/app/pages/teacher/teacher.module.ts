@@ -8,6 +8,7 @@ import {TeacherRoutingModule} from './teacher-routing.module';
 import {TeacherInfoComponent} from "./teacher-info/teacher-info.component";
 import {TeacherGradesComponent} from "./teacher-grades/teacher-grades.component";
 import {SetGradeComponent} from "./set-grade/set-grade.component";
+import {GroupStudentsComponent} from "./group-students/group-students.component";
 
 
 @NgModule({
@@ -17,6 +18,6 @@ import {SetGradeComponent} from "./set-grade/set-grade.component";
     IonicModule,
     TeacherRoutingModule
   ],
-  declarations: [TeacherMainComponent, TeacherInfoComponent, TeacherGradesComponent, SetGradeComponent]
+  declarations: [TeacherMainComponent, TeacherInfoComponent, TeacherGradesComponent, SetGradeComponent, GroupStudentsComponent]
 })
 export class TeacherModule {}

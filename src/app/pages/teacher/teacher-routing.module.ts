@@ -3,10 +3,11 @@ import { RouterModule, Routes } from '@angular/router';
 import { TeacherMainComponent } from './teacher-main.component';
 import {UserBasicDataResolver} from "../../shared/resolvers/user-basic-data.resolver";
 import {TeacherInfoComponent} from "./teacher-info/teacher-info.component";
-import {StudentGradeComponent} from "../student/student-grade/student-grade.component";
 import {TeacherGradesComponent} from "./teacher-grades/teacher-grades.component";
 import {StudentGradeResolver} from "./resolvers/student-grade.resolver";
 import {SetGradeComponent} from "./set-grade/set-grade.component";
+import {GroupStudentsResolver} from "./resolvers/group-students.resolver";
+import {GroupStudentsComponent} from "./group-students/group-students.component";
 
 const routes: Routes = [
   {
@@ -17,11 +18,19 @@ const routes: Routes = [
     },
     children: [
       {
-        path: ':id/grades/:subject/:faculty/:group/:uid',
+        path: ':id/grades/:subject/student/:studentId',
         component: SetGradeComponent,
         resolve: {
           userInfo: UserBasicDataResolver,
           studentGrade: StudentGradeResolver
+        },
+      },
+      {
+        path: ':id/grades/:subject/:group',
+        component: GroupStudentsComponent,
+        resolve: {
+          userInfo: UserBasicDataResolver,
+          groupStudents: GroupStudentsResolver
         },
       },
       {

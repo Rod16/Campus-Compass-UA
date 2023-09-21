@@ -1,16 +1,26 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot } from '@angular/router';
-import {IGradeParams} from "../interfaces/grade-params";
+import {SharedService} from "../../../shared/services/shared.service";
+import {IUserInfo} from "../../../shared/interfaces/user-info";
+import {map, Observable, switchMap} from "rxjs";
+import {TeacherService} from "../services/teacher.service";
+import {IStudentData} from "../../../shared/interfaces/student-data";
 
 @Injectable({ providedIn: 'root' })
 export class StudentGradeResolver {
+  constructor(private sharedService: SharedService, private teacherService: TeacherService) {
+  }
 
-  resolve(route: ActivatedRouteSnapshot): IGradeParams {
-    return {
-      subject: route.paramMap.get('subject') as string,
-      group: route.paramMap.get('group') as string,
-      faculty: route.paramMap.get('faculty') as string,
-      uid: route.paramMap.get('uid') as string
-    };
+  resolve(route: ActivatedRouteSnapshot): Observable<IStudentData> {
+    const studentId = route.paramMap.get('studentId') as string;
+    return this.sharedService.getUser(studentId).pipe(switchMap((doc) => {
+      let userInfo!: IUserInfo;
+      doc.docs.forEach((doc) => {
+        userInfo = doc.data() as IUserInfo;
+      });
+      return this.teacherService.getGradesDocumentByStudentId(userInfo, route.paramMap.get('subject') as string).pipe(map((student) => {
+        return student.data() as IStudentData;
+      }))
+    }));
   }
 }

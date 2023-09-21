@@ -26,4 +26,15 @@ export class TeacherService {
     const documentKey = `${gradeParams.university}-${gradeParams.faculty}-${gradeParams.group}-${gradeParams.uid}-grades-${gradeParams.subject}`;
     return this.fireStore.collection('students-data').doc(documentKey).get();
   }
+
+  getGradesDocumentByStudentId(student: IUserInfo, subject: string) {
+    const documentKey = `${student.university}-${student.faculty}-${student.group}-${student.uid}-grades-${subject}`;
+    return this.fireStore.collection('students-data').doc(documentKey).get();
+  }
+
+  getStudentsByGroup(groupId: string, university: string) {
+    const query = this.fireStore.collection<IUserInfo>('user-info', ref =>
+      ref.where('group', '==', groupId).where('university', '==', university));
+    return query.get();
+  }
 }
