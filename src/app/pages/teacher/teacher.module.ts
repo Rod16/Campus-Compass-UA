@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { TeacherMainComponent } from './teacher-main.component';
 
 import {TeacherRoutingModule} from './teacher-routing.module';
@@ -12,12 +12,13 @@ import {GroupStudentsComponent} from "./group-students/group-students.component"
 
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    TeacherRoutingModule
-  ],
+    imports: [
+        CommonModule,
+        FormsModule,
+        IonicModule,
+        TeacherRoutingModule,
+        ReactiveFormsModule
+    ],
   declarations: [TeacherMainComponent, TeacherInfoComponent, TeacherGradesComponent, SetGradeComponent, GroupStudentsComponent]
 })
 export class TeacherModule {}

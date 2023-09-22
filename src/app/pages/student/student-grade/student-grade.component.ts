@@ -2,9 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Data, Params} from "@angular/router";
 import {QuerySnapshot} from "@angular/fire/compat/firestore";
 import {IUserInfo} from "../../../shared/interfaces/user-info";
-import {UserRole} from "../../../shared/enums/user-role";
 import {StudentService} from "../services/student.service";
-import {IStudentData} from "../../../shared/interfaces/student-data";
+import {IGradeData} from "../../../shared/interfaces/grade-data";
 
 @Component({
   selector: 'app-student',
@@ -13,7 +12,7 @@ import {IStudentData} from "../../../shared/interfaces/student-data";
 })
 export class StudentGradeComponent implements OnInit {
   public userInfo!: IUserInfo;
-  public studentDataArray: IStudentData[] = [];
+  public studentDataArray: IGradeData[] = [];
 
   constructor(private route: ActivatedRoute, public studentService: StudentService) {}
 
@@ -26,7 +25,7 @@ export class StudentGradeComponent implements OnInit {
         this.studentService.getStudentData().subscribe((doc) => {
           doc.docs.forEach((item) => {
             if (item.id.startsWith(documentKey)) {
-              this.studentDataArray.push(item.data() as IStudentData);
+              this.studentDataArray.push(item.data() as IGradeData);
             }
           })
         });

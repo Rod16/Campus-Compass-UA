@@ -3,7 +3,9 @@ import {ActivatedRoute, Data} from "@angular/router";
 import {QuerySnapshot} from "@angular/fire/compat/firestore";
 import {IUserInfo} from "../../../shared/interfaces/user-info";
 import {BaseComponent} from "../../../shared/components/base.component";
-import {IStudentData} from "../../../shared/interfaces/student-data";
+import {FormBuilder, FormControl} from "@angular/forms";
+import {IGradeDataExtended} from "../interfaces/grade-data-extended";
+import {TeacherService} from "../services/teacher.service";
 
 @Component({
   selector: 'app-teacher-info',
@@ -12,9 +14,10 @@ import {IStudentData} from "../../../shared/interfaces/student-data";
 })
 export class SetGradeComponent extends BaseComponent implements OnInit {
   public userInfo!: IUserInfo;
-  public studentData!: IStudentData;
+  public studentData!: IGradeDataExtended;
+  public formControlsArray: FormControl[] = [];
 
-  constructor(private route: ActivatedRoute) {
+  constructor(private route: ActivatedRoute, private fb: FormBuilder, private teacherService: TeacherService) {
     super();
   }
 
@@ -24,6 +27,18 @@ export class SetGradeComponent extends BaseComponent implements OnInit {
         this.userInfo = doc.data() as IUserInfo;
       })
       this.studentData = details['studentGrade']
+      for (let i = 0; i < this.studentData.gradeData.grades.length; i++) {
+        this.formControlsArray.push(this.fb.control(this.studentData.gradeData.grades[i].mark));
+      }
+    })
+  }
+
+  public saveForm() {
+    this.studentData.gradeData.grades.forEach((item, index) => {
+      item.mark = this.formControlsArray[index].value;
+    })
+    this.teacherService.updateGradesDocument(this.studentData.gradeData, this.studentData.gradeData.subject, this.studentData.userInfo).then(() => {
+      alert('Оцінки успішно збережено');
     })
   }
 

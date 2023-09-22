@@ -1,4 +1,4 @@
-export interface IStudentData {
+export interface IGradeData {
   subject: string;
   grades: IGrade[];
 }

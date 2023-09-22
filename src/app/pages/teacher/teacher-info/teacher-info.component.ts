@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Data, Params} from "@angular/router";
 import {QuerySnapshot} from "@angular/fire/compat/firestore";
 import {IUserInfo} from "../../../shared/interfaces/user-info";
+import {SharedService} from "../../../shared/services/shared.service";
 
 @Component({
   selector: 'app-teacher-info',
@@ -11,7 +12,7 @@ import {IUserInfo} from "../../../shared/interfaces/user-info";
 export class TeacherInfoComponent implements OnInit {
   public userInfo!: IUserInfo;
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute, private sharedService: SharedService) {}
 
   ngOnInit() {
     this.route.data.subscribe((details: Data) => {
@@ -21,4 +22,7 @@ export class TeacherInfoComponent implements OnInit {
     });
   }
 
+  public signOut() {
+    this.sharedService.signOut();
+  }
 }

@@ -17,40 +17,42 @@ export class AuthorisationComponent implements OnInit {
     email: [''],
     password: ['']
   })
+  private userInfo!: IUserInfo;
   constructor(private fb: FormBuilder, private firestore: Firestore, private router: Router, private auth: AngularFireAuth, private zone: NgZone, public sharedService: SharedService) {}
 
   ngOnInit(): void {
-    // this.auth.authState.subscribe((user) => {
-    //   if (user) {
-    //     this.zone.run(() => {
-    //       this.router.navigate(["student"]);
-    //     });
-    //   }
-    // });
+    this.auth.authState.subscribe((user) => {
+      if (user) {
+        this.zone.run(() => {
+          this.navigateByRole(user);
+        });
+      }
+    });
   }
 
   public signIn() {
-    let userInfo: IUserInfo;
     this.auth
       .signInWithEmailAndPassword(this.authForm.get('email')?.value as string, this.authForm.get('password')?.value as string)
       .then((user) => {
-        this.sharedService.getUser(user.user?.uid as string).subscribe((snapshot) => {
-          snapshot.forEach(doc => {
-            userInfo = doc.data();
-            switch (userInfo.role) {
-              case UserRole.Student:
-                this.router.navigate(['student', user.user?.uid]);
-                break;
-              case UserRole.Teacher:
-                this.router.navigate(['teacher', user.user?.uid]);
-            }
-          })});
+        this.navigateByRole(user);
       })
       .catch((error: any) => {
         alert(error.message);
       });
   }
 
-  protected readonly window = window;
-  protected readonly Number = Number;
+  private navigateByRole(user: any) {
+    let uid = user.user? user.user.uid : user._delegate.uid;
+    this.sharedService.getUser(uid).subscribe((snapshot) => {
+      snapshot.forEach(doc => {
+        this.userInfo = doc.data();
+        switch (this.userInfo.role) {
+          case UserRole.Student:
+            this.router.navigate(['student', this.userInfo.uid]);
+            break;
+          case UserRole.Teacher:
+            this.router.navigate(['teacher', this.userInfo.uid]);
+        }
+      })});
+  }
 }
