@@ -1,6 +1,6 @@
 import {Component, NgZone, OnInit} from '@angular/core';
 import {FormBuilder} from "@angular/forms";
-import {collection, Firestore} from "@angular/fire/firestore";
+import {Firestore} from "@angular/fire/firestore";
 import {Router} from "@angular/router";
 import {AngularFireAuth} from "@angular/fire/compat/auth";
 import {SharedService} from "../../shared/services/shared.service";
