@@ -14,11 +14,8 @@ export class StudentGradeResolver {
 
   resolve(route: ActivatedRouteSnapshot): Observable<IGradeDataExtended> {
     const studentId = route.paramMap.get('studentId') as string;
-    return this.sharedService.getUser(studentId).pipe(switchMap((doc) => {
-      let userInfo!: IUserInfo;
-      doc.docs.forEach((doc) => {
-        userInfo = doc.data() as IUserInfo;
-      });
+    return this.sharedService.getUser(studentId).pipe(switchMap((userInfoData) => {
+      const userInfo = userInfoData as IUserInfo;
       return this.teacherService.getGradesDocumentByStudentId(userInfo, route.paramMap.get('subject') as string).pipe(map((student) => {
         return {
           gradeData: student.data() as IGradeData,

@@ -23,9 +23,7 @@ export class GroupStudentsComponent extends BaseComponent implements OnInit {
 
   ngOnInit() {
     super.unsubscribeOnComponentDestroy(this.route.data).subscribe((details: Data) => {
-      (details['userInfo'] as QuerySnapshot<IUserInfo>).forEach(doc => {
-        this.userInfo = doc.data() as IUserInfo;
-      })
+      this.userInfo = details['userInfo'];
       this.groupId = (details['groupStudents'] as IGroupStudents).group;
       this.subject = (details['groupStudents'] as IGroupStudents).subject;
       super.unsubscribeOnComponentDestroy(this.teacherService.getStudentsByGroup((details['groupStudents'] as IGroupStudents).group, this.userInfo.university as string)).subscribe((doc) => {

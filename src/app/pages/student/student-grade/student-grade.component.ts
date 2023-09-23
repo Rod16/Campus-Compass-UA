@@ -4,33 +4,26 @@ import {QuerySnapshot} from "@angular/fire/compat/firestore";
 import {IUserInfo} from "../../../shared/interfaces/user-info";
 import {StudentService} from "../services/student.service";
 import {IGradeData} from "../../../shared/interfaces/grade-data";
+import {BaseComponent} from "../../../shared/components/base.component";
 
 @Component({
   selector: 'app-student',
   templateUrl: './student-grade.component.html',
   styleUrls: ['./student-grade.component.scss'],
 })
-export class StudentGradeComponent implements OnInit {
+export class StudentGradeComponent extends BaseComponent implements OnInit {
   public userInfo!: IUserInfo;
   public studentDataArray: IGradeData[] = [];
 
-  constructor(private route: ActivatedRoute, public studentService: StudentService) {}
+  constructor(private route: ActivatedRoute) {
+    super();
+  }
 
   ngOnInit() {
-    let documentKey: string;
-    this.route.data.subscribe((details: Data) => {
-      (details['userInfo'] as QuerySnapshot<IUserInfo>).forEach(doc => {
-        this.userInfo = doc.data() as IUserInfo;
-        documentKey = `${this.userInfo.university}-${this.userInfo.faculty}-${this.userInfo.group}-${this.userInfo.uid}-grades`;
-        this.studentService.getStudentData().subscribe((doc) => {
-          doc.docs.forEach((item) => {
-            if (item.id.startsWith(documentKey)) {
-              this.studentDataArray.push(item.data() as IGradeData);
-            }
-          })
-        });
-      })
-    });
+    super.unsubscribeOnComponentDestroy(this.route.data).subscribe((details: Data) => {
+      this.studentDataArray = details['studentGrades'];
+      }
+    );
   }
 
 }

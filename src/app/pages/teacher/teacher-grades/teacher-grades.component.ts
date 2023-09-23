@@ -1,13 +1,11 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {ActivatedRoute, Data, Params} from "@angular/router";
-import {AngularFirestore, QuerySnapshot} from "@angular/fire/compat/firestore";
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Data} from "@angular/router";
+import {AngularFirestore} from "@angular/fire/compat/firestore";
 import {IUserInfo} from "../../../shared/interfaces/user-info";
 import {TeacherService} from "../services/teacher.service";
-import {ISubjectStudents, ISubjectStudentsList} from "../interfaces/teacher-data";
-import {catchError, combineLatest, delay, map, of, Subject, switchMap, takeUntil} from "rxjs";
+import {ISubjectStudentsList} from "../interfaces/teacher-data";
 import {StudentService} from "../../student/services/student.service";
 import {BaseComponent} from "../../../shared/components/base.component";
-import {Firestore} from "@angular/fire/firestore";
 
 @Component({
   selector: 'app-student',
@@ -24,50 +22,18 @@ export class TeacherGradesComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit() {
-    super.unsubscribeOnComponentDestroy(this.route.data).pipe(
-      switchMap((details: Data) => {
-        const userInfoDocs = details['userInfo'] as QuerySnapshot<IUserInfo>;
-
-        // Use combineLatest to fetch data from teacherService.getTeacherData() and userInfoDocs
-        return combineLatest([
-          of(userInfoDocs.docs.map((doc) => {
-            this.userInfo = doc.data() as IUserInfo;
-            return `${this.userInfo.university}-${this.userInfo.uid}-students-data`;
-          })),
-          super.unsubscribeOnComponentDestroy(this.teacherService.getTeacherData())
-        ]).pipe(
-          switchMap(([documentKeys, doc]) => {
-            const studentsData = doc.docs.find((item) => documentKeys.includes(item.id));
-
-            if (studentsData) {
-              this.studentData = studentsData.data() as ISubjectStudentsList;
-              return of(this.studentData);
-            } else {
-              return of(null); // or an appropriate default value
-            }
-          })
-        );
-      }),
-      catchError((error) => {
-        // Handle errors here
-        console.error('Error:', error);
-        return of(null); // or handle the error as needed
-      })
-    ).subscribe((studentData) => {
-      // Use studentData here or perform additional actions.
-      if (studentData) {
-        console.log('Student Data:', studentData);
-        studentData.subjectsArray.forEach((item) => {
+    super.unsubscribeOnComponentDestroy(this.route.data).subscribe((details: Data) => {
+      this.studentData = details['studentData'];
+      if (this.studentData) {
+        this.studentData.subjectsArray.forEach((item) => {
           super.unsubscribeOnComponentDestroy(this.teacherService.getIndividualStudents(item.individualStudents as string[])).subscribe((doc) => {
             doc.docs.forEach((item) => {
               this.individualStudentsArray.push(item.data() as IUserInfo);
             });
           });
         })
-      } else {
-        console.log('Student Data is not available.');
       }
-    });
+    })
   }
 
 }

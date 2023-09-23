@@ -23,9 +23,7 @@ export class SetGradeComponent extends BaseComponent implements OnInit {
 
   ngOnInit() {
     super.unsubscribeOnComponentDestroy(this.route.data).subscribe((details: Data) => {
-      (details['userInfo'] as QuerySnapshot<IUserInfo>).forEach(doc => {
-        this.userInfo = doc.data() as IUserInfo;
-      })
+      this.userInfo = details['userInfo'];
       this.studentData = details['studentGrade']
       for (let i = 0; i < this.studentData.gradeData.grades.length; i++) {
         this.formControlsArray.push(this.fb.control(this.studentData.gradeData.grades[i].mark));

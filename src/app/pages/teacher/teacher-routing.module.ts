@@ -8,6 +8,7 @@ import {StudentGradeResolver} from "./resolvers/student-grade.resolver";
 import {SetGradeComponent} from "./set-grade/set-grade.component";
 import {GroupStudentsResolver} from "./resolvers/group-students.resolver";
 import {GroupStudentsComponent} from "./group-students/group-students.component";
+import {StudentListResolver} from "./resolvers/student-list.resolver";
 
 const routes: Routes = [
   {
@@ -37,7 +38,7 @@ const routes: Routes = [
         path: ':id/grades',
         component: TeacherGradesComponent,
         resolve: {
-          userInfo: UserBasicDataResolver
+          studentData: StudentListResolver,
         },
       },
       {

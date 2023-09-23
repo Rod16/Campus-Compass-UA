@@ -6,6 +6,7 @@ import {AngularFirestore} from "@angular/fire/compat/firestore";
 import {IUserInfo} from "../interfaces/user-info";
 import {AngularFireAuth} from "@angular/fire/compat/auth";
 import {Router} from "@angular/router";
+import {of, switchMap} from "rxjs";
 
 @Injectable({providedIn: 'root'})
 export class SharedService {
@@ -25,7 +26,9 @@ export class SharedService {
   getUser(uid: string) {
     const query = this.fireStore.collection<IUserInfo>('user-info', ref =>
       ref.where('uid', '==', uid));
-    return query.get();
+    return query.get().pipe(switchMap(snapshot => {
+      return snapshot.docs.length > 0 ? of(snapshot.docs[0].data()) : of(null);
+    }));
   }
 
   signOut(): void {

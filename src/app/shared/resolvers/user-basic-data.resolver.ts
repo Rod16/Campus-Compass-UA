@@ -9,7 +9,7 @@ import {QuerySnapshot} from "@angular/fire/compat/firestore";
 export class UserBasicDataResolver {
   constructor(private sharedService: SharedService) {}
 
-  resolve(route: ActivatedRouteSnapshot): Observable<QuerySnapshot<IUserInfo>> {
-    return this.sharedService.getUser(route.paramMap.get('id') as string);
+  resolve(route: ActivatedRouteSnapshot): Observable<IUserInfo> {
+    return this.sharedService.getUser(route.paramMap.get('id') as string) as Observable<IUserInfo>
   }
 }

@@ -3,22 +3,23 @@ import {ActivatedRoute, Data} from "@angular/router";
 import {QuerySnapshot} from "@angular/fire/compat/firestore";
 import {IUserInfo} from "../../../shared/interfaces/user-info";
 import {SharedService} from "../../../shared/services/shared.service";
+import {BaseComponent} from "../../../shared/components/base.component";
 
 @Component({
   selector: 'app-student',
   templateUrl: './student-info.component.html',
   styleUrls: ['./student-info.component.scss'],
 })
-export class StudentInfoComponent implements OnInit {
+export class StudentInfoComponent extends BaseComponent implements OnInit {
   public userInfo!: IUserInfo;
 
-  constructor(private route: ActivatedRoute, private sharedService: SharedService) {}
+  constructor(private route: ActivatedRoute, private sharedService: SharedService) {
+    super();
+  }
 
   ngOnInit() {
-    this.route.data.subscribe((details: Data) => {
-      (details['userInfo'] as QuerySnapshot<IUserInfo>).forEach(doc => {
-        this.userInfo = doc.data() as IUserInfo;
-      })
+    super.unsubscribeOnComponentDestroy(this.route.data).subscribe((details: Data) => {
+      this.userInfo = details['userInfo'];
     });
   }
 
