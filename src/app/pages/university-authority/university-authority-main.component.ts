@@ -15,9 +15,7 @@ export class UniversityAuthorityMainComponent implements OnInit {
 
   ngOnInit() {
     this.route.data.subscribe((details: Data) => {
-      (details['userInfo'] as QuerySnapshot<IUserInfo>).forEach(doc => {
-        this.userInfo = doc.data() as IUserInfo;
-      })
+      this.userInfo = details['userInfo'];
     });
   }
 

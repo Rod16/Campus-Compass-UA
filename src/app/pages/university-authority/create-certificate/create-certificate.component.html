@@ -1,15 +1,35 @@
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title *ngIf="userInfo" size="large">{{userInfo.name}}</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <p (click)="signOut()">Вийти</p>
-  <p>Інформація про користувача</p>
-
-  <div>
-    <a [routerLink]="['/user-info']"><p>Документи</p></a>
-    <a [routerLink]="['./grades']"><p>Поточна успішність</p></a>
-  </div>
+  <form [formGroup]="certificateForm">
+    <p>Створити довідку:</p>
+    <ion-segment value="student" (ionChange)="segmentChanged($event)">
+      <ion-segment-button value="student">
+        <ion-label>Для студента</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="teacher">
+        <ion-label>Для викладача</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+    <div *ngIf="selectedRole === Role.Student">
+      <ion-title>Обрати студента</ion-title>
+      <div>
+        <ion-select formControlName="student" label="Обрати студента">
+          <ion-select-option *ngFor="let student of studentArray" [value]="student">
+            {{student.name}}
+          </ion-select-option>
+        </ion-select>
+        <ion-button *ngIf="certificateForm.get('student')?.value">Переглянути згенеровану довідку</ion-button>
+      </div>
+    </div>
+    <div *ngIf="selectedRole === Role.Teacher">
+      <ion-title>Обрати викладача</ion-title>
+      <div>
+        <ion-select formControlName="teacher" label="Обрати викладача">
+          <ion-select-option *ngFor="let teacher of teacherArray" [value]="teacher">
+            {{teacher.name}}
+          </ion-select-option>
+        </ion-select>
+        <ion-button *ngIf="certificateForm.get('teacher')?.value">Переглянути згенеровану довідку</ion-button>
+      </div>
+    </div>
+  </form>
 </ion-content>
