@@ -26,6 +26,7 @@ export class CreateCertificateComponent extends BaseComponent implements OnInit 
     student: [''],
     teacher: [''],
   });
+  public Role = Role;
 
   constructor(private route: ActivatedRoute, private sharedService: SharedService, private universityAuthorityService: UniversityAuthorityService, private fb: FormBuilder) {
     super();
