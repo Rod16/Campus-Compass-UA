@@ -17,7 +17,23 @@
             {{student.name}}
           </ion-select-option>
         </ion-select>
-        <ion-button *ngIf="certificateForm.get('student')?.value">Переглянути згенеровану довідку</ion-button>
+        <ion-button (click)="toggleStudentModal()" *ngIf="certificateForm.get('student')?.value" id="open-modal">Переглянути згенеровану довідку</ion-button>
+        <ion-modal [isOpen]="isStudentModalOpen">
+          <ng-template>
+            <ion-header>
+              <ion-toolbar>
+                <ion-title>{{$any(certificateForm.get('student')?.value).name}}</ion-title>
+                <ion-buttons slot="end">
+                  <ion-button (click)="toggleStudentModal()">Close</ion-button>
+                </ion-buttons>
+              </ion-toolbar>
+            </ion-header>
+            <ion-content class="ion-padding">
+              <div [innerHTML]="universityAuthorityService.generateStudentCertificate(certificateForm.get('student')?.value, id)"></div>
+              <ion-button (click)="saveStudentCertificate()">Зберегти</ion-button>
+            </ion-content>
+          </ng-template>
+        </ion-modal>
       </div>
     </div>
     <div *ngIf="selectedRole === Role.Teacher">
@@ -28,7 +44,23 @@
             {{teacher.name}}
           </ion-select-option>
         </ion-select>
-        <ion-button *ngIf="certificateForm.get('teacher')?.value">Переглянути згенеровану довідку</ion-button>
+        <ion-button (click)="toggleTeacherModal()" *ngIf="certificateForm.get('teacher')?.value">Переглянути згенеровану довідку</ion-button>
+        <ion-modal [isOpen]="isTeacherModalOpen">
+          <ng-template>
+            <ion-header>
+              <ion-toolbar>
+                <ion-title>{{$any(certificateForm.get('teacher')?.value).name}}</ion-title>
+                <ion-buttons slot="end">
+                  <ion-button (click)="toggleTeacherModal()">Close</ion-button>
+                </ion-buttons>
+              </ion-toolbar>
+            </ion-header>
+            <ion-content class="ion-padding">
+              <div [innerHTML]="universityAuthorityService.generateTeacherCertificate(certificateForm.get('teacher')?.value, id)"></div>
+              <ion-button (click)="saveTeacherCertificate()">Зберегти</ion-button>
+            </ion-content>
+          </ng-template>
+        </ion-modal>
       </div>
     </div>
   </form>

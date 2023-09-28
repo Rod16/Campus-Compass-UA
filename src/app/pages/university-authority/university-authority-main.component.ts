@@ -1,10 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Data, Params} from "@angular/router";
-import {QuerySnapshot} from "@angular/fire/compat/firestore";
 import {IUserInfo} from "../../shared/interfaces/user-info";
 
 @Component({
-  selector: 'app-student',
+  selector: 'app-authority-main',
   templateUrl: 'university-authority-main.component.html',
   styleUrls: ['university-authority-main.component.scss'],
 })

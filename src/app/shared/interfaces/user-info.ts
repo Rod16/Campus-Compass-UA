@@ -6,4 +6,5 @@ export interface IUserInfo {
   faculty?: string;
   group?: string;
   course?: string;
+  birthDate?: string;
 }

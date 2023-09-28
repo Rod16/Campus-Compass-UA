@@ -11,6 +11,7 @@ import {of, switchMap} from "rxjs";
 @Injectable({providedIn: 'root'})
 export class SharedService {
   db = getFirestore(initializeApp(environment.firebaseConfig));
+  id = '';
 
   constructor(private fireStore: AngularFirestore, private auth: AngularFireAuth, private router: Router) {
   }
@@ -35,5 +36,9 @@ export class SharedService {
     this.auth.signOut().then(() => {
       this.router.navigate(["/authorisation"]);
     });
+  }
+
+  generateRandomId(): void {
+    this.id = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
   }
 }
