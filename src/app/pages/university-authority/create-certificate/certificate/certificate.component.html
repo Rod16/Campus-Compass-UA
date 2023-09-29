@@ -1,0 +1,22 @@
+<ion-select [(ngModel)]="chosenUser" label="Обрати студента">
+  <ion-select-option *ngFor="let user of userArray" [value]="user">
+    {{user.name}}
+  </ion-select-option>
+</ion-select>
+<ion-button (click)="toggleModal()" *ngIf="chosenUser" id="open-modal">Переглянути згенеровану довідку</ion-button>
+<ion-modal [isOpen]="isModalOpen">
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>{{chosenUser.name}}</ion-title>
+        <ion-buttons slot="end">
+          <ion-button (click)="toggleModal()">Close</ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding">
+      <div [innerHTML]="universityAuthorityService.generateStudentCertificate(chosenUser, id)"></div>
+      <ion-button (click)="saveStudentCertificate()">Зберегти</ion-button>
+    </ion-content>
+  </ng-template>
+</ion-modal>

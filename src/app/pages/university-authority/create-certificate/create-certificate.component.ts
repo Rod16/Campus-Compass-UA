@@ -6,11 +6,7 @@ import {UniversityAuthorityService} from "../services/university-authority.servi
 import {switchMap} from "rxjs";
 import {BaseComponent} from "../../../shared/components/base.component";
 import {UntypedFormBuilder} from "@angular/forms";
-
-enum Role {
-  Student = 'student',
-  Teacher = 'teacher',
-}
+import {Role} from "./role"
 
 @Component({
   selector: 'app-create-certificate',
@@ -27,9 +23,6 @@ export class CreateCertificateComponent extends BaseComponent implements OnInit 
     teacher: [''],
   });
   public Role = Role;
-  public isStudentModalOpen = false;
-  public isTeacherModalOpen = false;
-  public id!: string;
 
   constructor(private route: ActivatedRoute, public sharedService: SharedService, public universityAuthorityService: UniversityAuthorityService, private fb: UntypedFormBuilder) {
     super();
@@ -51,34 +44,5 @@ export class CreateCertificateComponent extends BaseComponent implements OnInit 
         this.teacherArray.push(teacher);
       });
     }
-  }
-
-  public toggleStudentModal() {
-    this.isStudentModalOpen = !this.isStudentModalOpen;
-    if (this.isStudentModalOpen) {
-      this.generateId();
-    }
-  }
-
-  public toggleTeacherModal() {
-    this.isTeacherModalOpen = !this.isTeacherModalOpen;
-    if (this.isTeacherModalOpen) {
-      this.generateId();
-    }
-  }
-
-  generateId() {
-    this.sharedService.generateRandomId();
-    this.id = this.sharedService.id;
-  }
-
-  saveStudentCertificate() {
-    this.universityAuthorityService.saveCertificate(this.id, this.universityAuthorityService.generateStudentCertificate(this.certificateForm.get('student')?.value, this.id), this.certificateForm.get('student')?.value.name)
-    this.toggleStudentModal();
-  }
-
-  saveTeacherCertificate() {
-    this.universityAuthorityService.saveCertificate(this.id, this.universityAuthorityService.generateTeacherCertificate(this.certificateForm.get('teacher')?.value, this.id), this.certificateForm.get('teacher')?.value.name)
-    this.toggleTeacherModal();
   }
 }
