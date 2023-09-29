@@ -1,6 +1,4 @@
 import {Component, Input} from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
-import {UntypedFormBuilder} from "@angular/forms";
 import {Role} from "../role";
 import {BaseComponent} from "../../../../shared/components/base.component";
 import {IUserInfo} from "../../../../shared/interfaces/user-info";
