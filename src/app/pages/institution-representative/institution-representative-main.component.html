@@ -1,0 +1,17 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title *ngIf="userInfo">
+      {{userInfo.name}}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div>
+    <a [routerLink]="['/user-info']"><p>Документи</p></a>
+    <a [routerLink]="['/grades']"><p>Поточна успішність</p></a>
+  </div>
+
+  <router-outlet></router-outlet>
+</ion-content>
+

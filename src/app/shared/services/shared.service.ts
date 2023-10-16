@@ -41,4 +41,8 @@ export class SharedService {
   generateRandomId(): void {
     this.id = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
   }
+
+  getTwoDigitNumber(number: number): string {
+    return number < 10 ? '0' + number : number.toString();
+  }
 }

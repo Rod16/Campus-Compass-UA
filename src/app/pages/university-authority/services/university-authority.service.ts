@@ -2,11 +2,12 @@ import {Injectable} from "@angular/core";
 import {AngularFirestore} from "@angular/fire/compat/firestore";
 import {IUserInfo} from "../../../shared/interfaces/user-info";
 import {switchMap} from "rxjs";
+import {SharedService} from "../../../shared/services/shared.service";
 
 @Injectable({providedIn: 'root'})
 export class UniversityAuthorityService {
 
-  constructor(private fireStore: AngularFirestore) {
+  constructor(private fireStore: AngularFirestore, private sharedService: SharedService) {
   }
 
   getFacultyStudents(university: string, faculty: string) {
@@ -26,7 +27,7 @@ export class UniversityAuthorityService {
   }
 
   generateStudentCertificate(student: IUserInfo, id: string): string {
-    const date = new Date().getDate() + '.' + Number(new Date().getMonth() + 1) + '.' + new Date().getFullYear();
+    const date = this.sharedService.getTwoDigitNumber(new Date().getDate()) + '.' + this.sharedService.getTwoDigitNumber(Number(new Date().getMonth() + 1)) + '.' + new Date().getFullYear();
     return `<div>
       <p class="d2">Дата: <span class="d1">${date}</span></p>
       <p class="d2">Ідентифікатор: <span class="d1">${id}</span></p>
@@ -43,7 +44,7 @@ export class UniversityAuthorityService {
   }
 
   generateTeacherCertificate(teacher: IUserInfo, id: string): string {
-    const date = new Date().getDate() + '.' + Number(new Date().getMonth() + 1) + '.' + new Date().getFullYear();
+    const date = this.sharedService.getTwoDigitNumber(new Date().getDate()) + '.' + this.sharedService.getTwoDigitNumber(Number(new Date().getMonth() + 1)) + '.' + new Date().getFullYear();
     return `<div>
       <p class="d2">Дата: <span class="d1">${date}</span></p>
       <p class="d2">Ідентифікатор: <span class="d1">${id}</span></p>
@@ -62,6 +63,7 @@ export class UniversityAuthorityService {
       id,
       template,
       name,
+      date: this.sharedService.getTwoDigitNumber(new Date().getDate()) + '.' + this.sharedService.getTwoDigitNumber(Number(new Date().getMonth() + 1)) + '.' + new Date().getFullYear()
     })
   }
 

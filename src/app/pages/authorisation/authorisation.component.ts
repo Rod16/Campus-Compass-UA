@@ -57,6 +57,10 @@ export class AuthorisationComponent extends BaseComponent implements OnInit {
           break;
         case UserRole.Authority:
           this.router.navigate(['authority', this.userInfo.uid]);
+          break;
+        case UserRole.InstitutionRepresentative:
+          this.router.navigate(['institution', this.userInfo.uid]);
+          break;
       }
     });
   }

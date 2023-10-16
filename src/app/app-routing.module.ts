@@ -15,6 +15,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/university-authority/university-authority.module').then(m => m.UniversityAuthorityModule)
   },
   {
+    path: 'institution',
+    loadChildren: () => import('./pages/institution-representative/institution-representative.module').then(m => m.InstitutionRepresentativeModule)
+  },
+  {
     path: 'authorisation',
     loadChildren: () => import('./pages/authorisation/authorisation.module').then(m => m.AuthorisationModule)
   },
