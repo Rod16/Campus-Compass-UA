@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import {AngularFirestore} from "@angular/fire/compat/firestore";
-import {filter, map, Observable} from "rxjs";
+import {map, Observable} from "rxjs";
 import {ICertificate} from "../../../shared/interfaces/certificate";
 
 @Injectable({providedIn: 'root'})

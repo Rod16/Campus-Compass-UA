@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { UniversityAuthorityMainComponent } from './university-authority-main.component';
 import {UserBasicDataResolver} from "../../shared/resolvers/user-basic-data.resolver";
 import {CreateCertificateComponent} from "./create-certificate/create-certificate.component";
-import {TeacherInfoComponent} from "../teacher/teacher-info/teacher-info.component";
 import {UniversityAuthorityInfoComponent} from "./university-authority-info/university-authority-info.component";
 import {EditUserComponent} from "./edit-user/edit-user.component";
 import {UsersListComponent} from "./users-list/users-list.component";

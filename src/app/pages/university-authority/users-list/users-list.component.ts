@@ -4,11 +4,8 @@ import {IUserInfo} from "../../../shared/interfaces/user-info";
 import {SharedService} from "../../../shared/services/shared.service";
 import {UniversityAuthorityService} from "../services/university-authority.service";
 import {BaseComponent} from "../../../shared/components/base.component";
-import {UntypedFormBuilder, Validators} from "@angular/forms";
-import {Role} from "../enums/role"
-import {PageAction} from "../enums/page-action";
+import {UntypedFormBuilder} from "@angular/forms";
 import {debounceTime, switchMap} from "rxjs";
-import {ICertificate} from "../../../shared/interfaces/certificate";
 import {UserRole} from "../../../shared/enums/user-role";
 
 @Component({

@@ -3,12 +3,11 @@ import {AngularFirestore} from "@angular/fire/compat/firestore";
 import {IUserInfo} from "../../../shared/interfaces/user-info";
 import {switchMap} from "rxjs";
 import {SharedService} from "../../../shared/services/shared.service";
-import {AngularFireAuth} from "@angular/fire/compat/auth";
 
 @Injectable({providedIn: 'root'})
 export class AuthorisationService {
 
-  constructor(private fireStore: AngularFirestore, private sharedService: SharedService, private auth: AngularFireAuth) {
+  constructor(private fireStore: AngularFirestore, private sharedService: SharedService) {
   }
 
   login(email: string, password: string) {

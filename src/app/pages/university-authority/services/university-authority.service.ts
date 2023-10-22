@@ -4,18 +4,12 @@ import {IUserInfo} from "../../../shared/interfaces/user-info";
 import {map, Observable, switchMap} from "rxjs";
 import {SharedService} from "../../../shared/services/shared.service";
 import {PageAction} from "../enums/page-action";
-import {getFirestore} from "@angular/fire/firestore";
-import {initializeApp} from "@angular/fire/app";
-import {environment} from "../../../../environments/environment";
-import {AngularFireAuth} from "@angular/fire/compat/auth";
-import {ICertificate} from "../../../shared/interfaces/certificate";
-import {Role} from "../enums/role";
 import {UserRole} from "../../../shared/enums/user-role";
 
 @Injectable({providedIn: 'root'})
 export class UniversityAuthorityService {
 
-  constructor(private fireStore: AngularFirestore, private sharedService: SharedService, private auth: AngularFireAuth) {
+  constructor(private fireStore: AngularFirestore, private sharedService: SharedService) {
   }
 
   getFacultyStudents(university: string, faculty: string) {
