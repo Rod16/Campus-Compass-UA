@@ -6,10 +6,10 @@ import {UniversityAuthorityService} from "../services/university-authority.servi
 import {switchMap} from "rxjs";
 import {BaseComponent} from "../../../shared/components/base.component";
 import {UntypedFormBuilder} from "@angular/forms";
-import {Role} from "./role"
+import {Role} from "../enums/role"
 
 @Component({
-  selector: 'app-create-certificate',
+  selector: 'app-view-certificate',
   templateUrl: './create-certificate.component.html',
   styleUrls: ['./create-certificate.component.scss'],
 })

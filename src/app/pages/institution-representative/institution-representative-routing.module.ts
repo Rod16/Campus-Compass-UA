@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { InstitutionRepresentativeMainComponent } from './institution-representative-main.component';
 import {UserBasicDataResolver} from "../../shared/resolvers/user-basic-data.resolver";
-import {ViewCertificateComponent} from "./create-certificate/view-certificate.component";
+import {ViewCertificateComponent} from "./view-certificate/view-certificate.component";
 import {TeacherInfoComponent} from "../teacher/teacher-info/teacher-info.component";
 import {InstitutionRepresentativeInfoComponent} from "./university-authority-info/institution-representative-info.component";
 

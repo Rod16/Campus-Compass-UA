@@ -5,6 +5,9 @@ import {UserBasicDataResolver} from "../../shared/resolvers/user-basic-data.reso
 import {CreateCertificateComponent} from "./create-certificate/create-certificate.component";
 import {TeacherInfoComponent} from "../teacher/teacher-info/teacher-info.component";
 import {UniversityAuthorityInfoComponent} from "./university-authority-info/university-authority-info.component";
+import {EditUserComponent} from "./edit-user/edit-user.component";
+import {UsersListComponent} from "./users-list/users-list.component";
+import {UserEditDataResolver} from "./resolvers/user-edit-data-resolver";
 
 const routes: Routes = [
   {
@@ -15,8 +18,35 @@ const routes: Routes = [
     },
     children: [
       {
-        path: ':id/create-certificate',
+        path: ':id/view-certificate',
         component: CreateCertificateComponent,
+        resolve: {
+          userInfo: UserBasicDataResolver
+        },
+      },
+      {
+        path: ':id/users',
+        component: UsersListComponent,
+        resolve: {
+          userInfo: UserBasicDataResolver
+        },
+      },
+      {
+        path: ':id/edit-user/:user-uid',
+        component: EditUserComponent,
+        data: {
+          action: 'edit'
+        },
+        resolve: {
+          userInfo: UserEditDataResolver
+        },
+      },
+      {
+        path: ':id/create-user',
+        component: EditUserComponent,
+        data: {
+          action: 'create'
+        },
         resolve: {
           userInfo: UserBasicDataResolver
         },

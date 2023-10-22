@@ -7,11 +7,13 @@ import {IUserInfo} from "../interfaces/user-info";
 import {AngularFireAuth} from "@angular/fire/compat/auth";
 import {Router} from "@angular/router";
 import {of, switchMap} from "rxjs";
+import * as CryptoJS from 'crypto-js';
 
 @Injectable({providedIn: 'root'})
 export class SharedService {
   db = getFirestore(initializeApp(environment.firebaseConfig));
   id = '';
+  encryptSecretKey = 'secret-key'
 
   constructor(private fireStore: AngularFirestore, private auth: AngularFireAuth, private router: Router) {
   }
@@ -44,5 +46,25 @@ export class SharedService {
 
   getTwoDigitNumber(number: number): string {
     return number < 10 ? '0' + number : number.toString();
+  }
+
+  encryptData(data: string) {
+    try {
+      return CryptoJS.AES.encrypt(data, this.encryptSecretKey).toString();
+    } catch (e) {
+      return Error;
+    }
+  }
+
+  decryptData(data: string) {
+    try {
+      const bytes = CryptoJS.AES.decrypt(data, this.encryptSecretKey);
+      if (bytes.toString()) {
+        return bytes.toString(CryptoJS.enc.Utf8);
+      }
+      return data;
+    } catch (e) {
+      return Error;
+    }
   }
 }

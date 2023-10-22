@@ -7,4 +7,6 @@ export interface IUserInfo {
   group?: string;
   course?: string;
   birthDate?: string;
+  email: string;
+  password: string;
 }

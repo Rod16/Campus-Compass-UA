@@ -1,18 +1,26 @@
 import {Injectable} from "@angular/core";
 import {AngularFirestore} from "@angular/fire/compat/firestore";
 import {IUserInfo} from "../../../shared/interfaces/user-info";
-import {switchMap} from "rxjs";
+import {map, Observable, switchMap} from "rxjs";
 import {SharedService} from "../../../shared/services/shared.service";
+import {PageAction} from "../enums/page-action";
+import {getFirestore} from "@angular/fire/firestore";
+import {initializeApp} from "@angular/fire/app";
+import {environment} from "../../../../environments/environment";
+import {AngularFireAuth} from "@angular/fire/compat/auth";
+import {ICertificate} from "../../../shared/interfaces/certificate";
+import {Role} from "../enums/role";
+import {UserRole} from "../../../shared/enums/user-role";
 
 @Injectable({providedIn: 'root'})
 export class UniversityAuthorityService {
 
-  constructor(private fireStore: AngularFirestore, private sharedService: SharedService) {
+  constructor(private fireStore: AngularFirestore, private sharedService: SharedService, private auth: AngularFireAuth) {
   }
 
   getFacultyStudents(university: string, faculty: string) {
     const query = this.fireStore.collection<IUserInfo>('user-info', ref =>
-      ref.where('faculty', '==', faculty).where('university', '==', university).where('role', '==', 'student'));
+      ref.where('faculty', '==', faculty).where('university', '==', university).where('role', '==', UserRole.Student));
     return query.get().pipe(switchMap(snapshot => {
       return snapshot.docs.length > 0 ? snapshot.docs.map(student => student.data()) : [];
     }));
@@ -20,9 +28,21 @@ export class UniversityAuthorityService {
 
   getTeachers(university: string) {
     const query = this.fireStore.collection<IUserInfo>('user-info', ref =>
-      ref.where('university', '==', university).where('role', '==', 'teacher'));
+      ref.where('university', '==', university).where('role', '==', UserRole.Teacher));
     return query.get().pipe(switchMap(snapshot => {
       return snapshot.docs.length > 0 ? snapshot.docs.map(teacher => teacher.data()) : [];
+    }));
+  }
+
+  searchUsers(searchTerm: string, university: string, faculty?: string): Observable<IUserInfo[]> {
+    const query = this.fireStore.collection<IUserInfo>('user-info', ref =>
+        ref.where('university', '==', university));
+    return query.get().pipe(map((snapshot) => {
+      return snapshot.docs.map((user) => {
+        return user.data() as IUserInfo;
+      }).filter((user: IUserInfo) => {
+        return user.name.toLowerCase().includes(searchTerm.toLowerCase()) && user.role !== UserRole.UniversityAuthority && ((user.role === UserRole.Student && user.faculty === faculty) || user.role === UserRole.Teacher);
+      });
     }));
   }
 
@@ -67,4 +87,14 @@ export class UniversityAuthorityService {
     })
   }
 
-}
+  saveUser(user: IUserInfo, action: string) {
+    if (action === PageAction.Create) {
+      this.fireStore.collection('user-info').doc(user.uid).set(user).then(() => {
+            //this.sharedService.presentToast('Please fill all the required fields');
+      });
+    } else {
+      this.fireStore.collection('user-info').doc(user.uid).update(user).then(() => {//this.sharedService.presentToast('Please fill all the required fields');;
+    });
+  }
+
+}}

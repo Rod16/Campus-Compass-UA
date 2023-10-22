@@ -9,14 +9,6 @@ export class InstitutionRepresentativeService {
   constructor(private fireStore: AngularFirestore) {
   }
 
-  getCertificates(): Observable<ICertificate[]> {
-    return this.fireStore.collection('certificates').get().pipe(map((snapshot) => {
-      return snapshot.docs.map((certificate) => {
-        return certificate.data() as ICertificate;
-      });
-    }));
-  }
-
   searchCertificates(searchTerm: string): Observable<ICertificate[]> {
     return this.fireStore.collection('certificates').get().pipe(map((snapshot) => {
       return snapshot.docs.map((certificate) => {

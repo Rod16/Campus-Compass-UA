@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {Role} from "../role";
+import {Role} from "../../enums/role";
 import {BaseComponent} from "../../../../shared/components/base.component";
 import {IUserInfo} from "../../../../shared/interfaces/user-info";
 import {SharedService} from "../../../../shared/services/shared.service";

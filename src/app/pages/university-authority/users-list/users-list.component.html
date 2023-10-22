@@ -1,0 +1,11 @@
+<ion-content [fullscreen]="true">
+  <ion-title>Студенти та викладачі</ion-title>
+  <ion-searchbar [formControl]="searchTerm"></ion-searchbar>
+  <ion-list lines="none" [inset]="true">
+    <ion-item *ngFor="let user of usersArray" class="p-0" [routerLink]="'../edit-user/' + user.uid">
+      <ion-card class="cursor-pointer">
+        {{user.name}} - {{user.role === UserRole.Student ? 'Студент' : 'Викладач'}}
+      </ion-card>
+    </ion-item>
+  </ion-list>
+</ion-content>

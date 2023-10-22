@@ -5,7 +5,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { InstitutionRepresentativeMainComponent } from './institution-representative-main.component';
 
 import {InstitutionRepresentativeRoutingModule} from './institution-representative-routing.module';
-import {ViewCertificateComponent} from "./create-certificate/view-certificate.component";
+import {ViewCertificateComponent} from "./view-certificate/view-certificate.component";
 import {InstitutionRepresentativeInfoComponent} from "./university-authority-info/institution-representative-info.component";
 
 

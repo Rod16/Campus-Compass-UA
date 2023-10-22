@@ -8,6 +8,8 @@ import {UniversityAuthorityRoutingModule} from './university-authority-routing.m
 import {CreateCertificateComponent} from "./create-certificate/create-certificate.component";
 import {UniversityAuthorityInfoComponent} from "./university-authority-info/university-authority-info.component";
 import {CertificateComponent} from "./create-certificate/certificate/certificate.component";
+import {EditUserComponent} from "./edit-user/edit-user.component";
+import {UsersListComponent} from "./users-list/users-list.component";
 
 
 @NgModule({
@@ -18,6 +20,6 @@ import {CertificateComponent} from "./create-certificate/certificate/certificate
         UniversityAuthorityRoutingModule,
         ReactiveFormsModule
     ],
-  declarations: [UniversityAuthorityMainComponent, CreateCertificateComponent, UniversityAuthorityInfoComponent, CertificateComponent]
+  declarations: [UniversityAuthorityMainComponent, CreateCertificateComponent, UniversityAuthorityInfoComponent, CertificateComponent, EditUserComponent, UsersListComponent]
 })
 export class UniversityAuthorityModule {}

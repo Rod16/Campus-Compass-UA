@@ -1,0 +1,38 @@
+<ion-content [fullscreen]="true">
+  <form [formGroup]="userForm">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>{{action === PageAction.Create ? 'Створити нового користувача' : 'Редагувати користувача'}}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-item>
+          <ion-input formControlName="name" type="text" label="ПІБ"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input formControlName="email" type="email" label="Email"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Дата народження</ion-label>
+          <ion-datetime (ionChange)="formatDatePickerValue()" formControlName="birthDate" presentation="date" [preferWheel]="true"></ion-datetime>
+        </ion-item>
+        <ion-item *ngIf="!userInfo.faculty">
+          <ion-input formControlName="faculty" type="text" label="Факультет (абревіатура)"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Роль</ion-label>
+          <ion-radio-group formControlName="role" (ionChange)="roleChange($any($event))">
+            <ion-radio [value]="Role.Student" labelPlacement="end">Студент</ion-radio>
+            <ion-radio [value]="Role.Teacher" labelPlacement="end">Викладач</ion-radio>
+          </ion-radio-group>
+        </ion-item>
+        <ion-item *ngIf="userForm.get('role')?.value === Role.Student">
+          <ion-input formControlName="course" type="number" label="Курс"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="userForm.get('role')?.value === Role.Student">
+          <ion-input formControlName="group" type="text" label="Група"></ion-input>
+        </ion-item>
+        <ion-button (click)="saveUser()" [disabled]="userForm.invalid">{{action === PageAction.Create ? 'Створити' : 'Зберегти'}}</ion-button>
+      </ion-card-content>
+    </ion-card>
+  </form>
+</ion-content>

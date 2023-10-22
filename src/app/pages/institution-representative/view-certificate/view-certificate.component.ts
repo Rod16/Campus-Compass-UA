@@ -29,7 +29,7 @@ export class ViewCertificateComponent extends BaseComponent implements OnInit {
   ngOnInit() {
     super.unsubscribeOnComponentDestroy(this.route.data).pipe(switchMap((details: Data) => {
       this.userInfo = details['userInfo'];
-      return this.institutionRepresentativeService.getCertificates();
+      return this.institutionRepresentativeService.searchCertificates('');
     })).subscribe((certificatesArray: ICertificate[]) => {
       this.certificatesArray = certificatesArray;
     });
