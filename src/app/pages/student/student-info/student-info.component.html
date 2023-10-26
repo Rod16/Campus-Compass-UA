@@ -6,10 +6,9 @@
   </ion-header>
 
   <p (click)="signOut()">Вийти</p>
-  <p>Інформація про користувача</p>
 
   <div>
-    <a [routerLink]="['/user-info']"><p>Документи</p></a>
-    <a [routerLink]="['./grades']"><p>Поточна успішність</p></a>
+    <a [routerLink]="['account']"><p>Інформація про користувача</p></a>
+    <a [routerLink]="['grades']"><p>Поточна успішність</p></a>
   </div>
 </ion-content>

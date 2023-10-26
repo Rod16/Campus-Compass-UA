@@ -7,6 +7,7 @@ import { StudentMainComponent } from './student-main.component';
 import {StudentRoutingModule} from './student-routing.module';
 import {StudentGradeComponent} from "./student-grade/student-grade.component";
 import {StudentInfoComponent} from "./student-info/student-info.component";
+import {SharedModule} from "../../shared/shared.module";
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import {StudentInfoComponent} from "./student-info/student-info.component";
     CommonModule,
     FormsModule,
     IonicModule,
-    StudentRoutingModule
+    StudentRoutingModule,
+    SharedModule
   ],
   declarations: [StudentMainComponent, StudentGradeComponent, StudentInfoComponent]
 })

@@ -3,7 +3,7 @@ import {FormBuilder} from "@angular/forms";
 import {Firestore} from "@angular/fire/firestore";
 import {Router} from "@angular/router";
 import {AngularFireAuth} from "@angular/fire/compat/auth";
-import {SharedService} from "../../../shared/services/shared.service";
+import {SharedService} from "../../../services/shared.service";
 
 @Component({
   selector: 'app-registration-form',

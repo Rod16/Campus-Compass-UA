@@ -10,6 +10,7 @@ import {UniversityAuthorityInfoComponent} from "./university-authority-info/univ
 import {CertificateComponent} from "./create-certificate/certificate/certificate.component";
 import {EditUserComponent} from "./edit-user/edit-user.component";
 import {UsersListComponent} from "./users-list/users-list.component";
+import {SharedModule} from "../../shared/shared.module";
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import {UsersListComponent} from "./users-list/users-list.component";
         FormsModule,
         IonicModule,
         UniversityAuthorityRoutingModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        SharedModule
     ],
   declarations: [UniversityAuthorityMainComponent, CreateCertificateComponent, UniversityAuthorityInfoComponent, CertificateComponent, EditUserComponent, UsersListComponent]
 })

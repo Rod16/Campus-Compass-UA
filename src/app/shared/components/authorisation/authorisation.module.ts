@@ -8,9 +8,9 @@ import { HomePageRoutingModule } from './authorisation-routing.module';
 import {AngularFireAuthModule} from "@angular/fire/compat/auth";
 import {AngularFireModule} from "@angular/fire/compat";
 import {AngularFireDatabaseModule} from "@angular/fire/compat/database";
-import {environment} from "../../../environments/environment";
-import {EntryFieldsModule} from "../../shared/entry-fields/entry-fields.module";
 import {RegistrationFormComponent} from "./registration-form/registration-form.component";
+import {environment} from "../../../../environments/environment";
+import {EntryFieldsModule} from "../../entry-fields/entry-fields.module";
 
 
 @NgModule({

@@ -5,6 +5,7 @@ import {StudentGradeComponent} from "./student-grade/student-grade.component";
 import {UserBasicDataResolver} from "../../shared/resolvers/user-basic-data.resolver";
 import {StudentInfoComponent} from "./student-info/student-info.component";
 import {StudentGradeResolver} from "./resolvers/student-grade.resolver";
+import {UserInfoComponent} from "../../shared/components/user-info/user-info.component";
 
 const routes: Routes = [
   {
@@ -17,6 +18,13 @@ const routes: Routes = [
       {
         path: ':id',
         component: StudentInfoComponent,
+        resolve: {
+          userInfo: UserBasicDataResolver
+        },
+      },
+      {
+        path: ':id/account',
+        component: UserInfoComponent,
         resolve: {
           userInfo: UserBasicDataResolver
         },

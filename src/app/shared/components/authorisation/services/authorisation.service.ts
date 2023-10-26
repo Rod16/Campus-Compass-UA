@@ -1,8 +1,8 @@
 import {Injectable} from "@angular/core";
 import {AngularFirestore} from "@angular/fire/compat/firestore";
-import {IUserInfo} from "../../../shared/interfaces/user-info";
 import {switchMap} from "rxjs";
-import {SharedService} from "../../../shared/services/shared.service";
+import {SharedService} from "../../../services/shared.service";
+import {IUserInfo} from "../../../interfaces/user-info";
 
 @Injectable({providedIn: 'root'})
 export class AuthorisationService {

@@ -3,6 +3,7 @@ export interface IUserInfo {
   name: string;
   role: string;
   university?: string;
+  institution?: string;
   faculty?: string;
   group?: string;
   course?: string;

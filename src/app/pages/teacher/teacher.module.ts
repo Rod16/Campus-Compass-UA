@@ -9,6 +9,7 @@ import {TeacherInfoComponent} from "./teacher-info/teacher-info.component";
 import {TeacherGradesComponent} from "./teacher-grades/teacher-grades.component";
 import {SetGradeComponent} from "./set-grade/set-grade.component";
 import {GroupStudentsComponent} from "./group-students/group-students.component";
+import {SharedModule} from "../../shared/shared.module";
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import {GroupStudentsComponent} from "./group-students/group-students.component"
         FormsModule,
         IonicModule,
         TeacherRoutingModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        SharedModule
     ],
   declarations: [TeacherMainComponent, TeacherInfoComponent, TeacherGradesComponent, SetGradeComponent, GroupStudentsComponent]
 })

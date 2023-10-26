@@ -1,0 +1,63 @@
+<ion-content [fullscreen]="true">
+  <ion-title>Кабінет користувача</ion-title>
+  <ion-list>
+    <ion-item>
+      <div class="d-flex align-items-center">
+        <p class="me-3">Ім'я</p>
+        <p>{{userInfo.name}}</p>
+      </div>
+    </ion-item>
+    <ion-item>
+      <div class="d-flex align-items-center">
+        <p class="me-3">Роль в системі</p>
+        <p>{{userInfo.role}}</p>
+      </div>
+    </ion-item>
+    <ion-item>
+      <div class="d-flex align-items-center">
+        <p class="me-3">Email</p>
+        <p>{{userInfo.email}}</p>
+      </div>
+    </ion-item>
+    <ng-container *ngIf="userInfo.role !== UserRole.InstitutionRepresentative">
+      <ion-item>
+        <div class="d-flex align-items-center">
+          <p class="me-3">Дата народження</p>
+          <p>{{userInfo.birthDate}}</p>
+        </div>
+      </ion-item>
+      <ion-item>
+        <div class="d-flex align-items-center">
+          <p class="me-3">Університет</p>
+          <p>{{userInfo.university}}</p>
+        </div>
+      </ion-item>
+    </ng-container>
+    <ng-container *ngIf="userInfo.role === UserRole.Student">
+      <ion-item>
+        <div class="d-flex align-items-center">
+          <p class="me-3">Курс</p>
+          <p>{{userInfo.course}}</p>
+        </div>
+      </ion-item>
+      <ion-item>
+        <div class="d-flex align-items-center">
+          <p class="me-3">Факультет</p>
+          <p>{{userInfo.faculty}}</p>
+        </div>
+      </ion-item>
+      <ion-item>
+        <div class="d-flex align-items-center">
+          <p class="me-3">Група</p>
+          <p>{{userInfo.group}}</p>
+        </div>
+      </ion-item>
+    </ng-container>
+    <ion-item *ngIf="userInfo.role === UserRole.InstitutionRepresentative">
+      <div class="d-flex align-items-center">
+        <p class="me-3">Назва установи</p>
+        <p>{{userInfo.institution}}</p>
+      </div>
+    </ion-item>
+  </ion-list>
+</ion-content>

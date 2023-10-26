@@ -6,9 +6,9 @@
   </ion-header>
 
   <p (click)="signOut()">Вийти</p>
-  <p>Інформація про користувача</p>
 
   <div>
+    <a [routerLink]="'account'"><p>Інформація про користувача</p></a>
     <a [routerLink]="'view-certificate'"><p>Переглянути довідки</p></a>
   </div>
 </ion-content>

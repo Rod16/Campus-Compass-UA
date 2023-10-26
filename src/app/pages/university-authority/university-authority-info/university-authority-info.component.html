@@ -6,11 +6,10 @@
   </ion-header>
 
   <p (click)="signOut()">Вийти</p>
-  <p>Інформація про користувача</p>
 
   <div>
     <a [routerLink]="'view-certificate'"><p>Створити довідку</p></a>
-    <a [routerLink]="['./grades']"><p>Додати навчальну дисципліну</p></a>
+    <a [routerLink]="['account']"><p>Інформація про користувача</p></a>
     <a [routerLink]="['create-user']"><p>Додати користувача</p></a>
     <a [routerLink]="['users']"><p>Переглянути користувачів</p></a>
   </div>

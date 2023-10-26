@@ -3,11 +3,11 @@ import {FormBuilder} from "@angular/forms";
 import {Firestore} from "@angular/fire/firestore";
 import {Router} from "@angular/router";
 import {AngularFireAuth} from "@angular/fire/compat/auth";
-import {SharedService} from "../../shared/services/shared.service";
-import {IUserInfo} from "../../shared/interfaces/user-info";
-import {UserRole} from "../../shared/enums/user-role";
-import {BaseComponent} from "../../shared/components/base.component";
 import {AuthorisationService} from "./services/authorisation.service";
+import {BaseComponent} from "../base.component";
+import {IUserInfo} from "../../interfaces/user-info";
+import {SharedService} from "../../services/shared.service";
+import {UserRole} from "../../enums/user-role";
 
 @Component({
   selector: 'app-authorisation',
@@ -24,16 +24,6 @@ export class AuthorisationComponent extends BaseComponent {
     super();
   }
 
-  // ngOnInit(): void {
-  //   super.unsubscribeOnComponentDestroy(this.auth.authState).subscribe((user) => {
-  //     if (user) {
-  //       this.zone.run(() => {
-  //         this.navigateByRole(user);
-  //       });
-  //     }
-  //   });
-  // }
-
   public signIn() {
     // this.auth
     //   .signInWithEmailAndPassword(this.authForm.get('email')?.value as string, this.authForm.get('password')?.value as string)
@@ -45,7 +35,6 @@ export class AuthorisationComponent extends BaseComponent {
     //   });
     super.unsubscribeOnComponentDestroy(this.authorisationService.login(this.authForm.get('email')?.value as string, this.authForm.get('password')?.value as string)).subscribe((user) => {
       if (user) {
-        console.log(user);
         this.navigateByRole(user);
       }
     });

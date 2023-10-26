@@ -7,6 +7,8 @@ import {UniversityAuthorityInfoComponent} from "./university-authority-info/univ
 import {EditUserComponent} from "./edit-user/edit-user.component";
 import {UsersListComponent} from "./users-list/users-list.component";
 import {UserEditDataResolver} from "./resolvers/user-edit-data-resolver";
+import {UserInfoComponent} from "../../shared/components/user-info/user-info.component";
+import {StudentGradeResolver} from "../teacher/resolvers/student-grade.resolver";
 
 const routes: Routes = [
   {
@@ -46,6 +48,13 @@ const routes: Routes = [
         data: {
           action: 'create'
         },
+        resolve: {
+          userInfo: UserBasicDataResolver
+        },
+      },
+      {
+        path: ':id/account',
+        component: UserInfoComponent,
         resolve: {
           userInfo: UserBasicDataResolver
         },

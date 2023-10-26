@@ -7,6 +7,7 @@ import { InstitutionRepresentativeMainComponent } from './institution-representa
 import {InstitutionRepresentativeRoutingModule} from './institution-representative-routing.module';
 import {ViewCertificateComponent} from "./view-certificate/view-certificate.component";
 import {InstitutionRepresentativeInfoComponent} from "./university-authority-info/institution-representative-info.component";
+import {SharedModule} from "../../shared/shared.module";
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import {InstitutionRepresentativeInfoComponent} from "./university-authority-inf
         FormsModule,
         IonicModule,
         InstitutionRepresentativeRoutingModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        SharedModule
     ],
   declarations: [InstitutionRepresentativeMainComponent, ViewCertificateComponent, InstitutionRepresentativeInfoComponent]
 })

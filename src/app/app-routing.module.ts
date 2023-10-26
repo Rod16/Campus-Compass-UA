@@ -20,7 +20,7 @@ const routes: Routes = [
   },
   {
     path: 'authorisation',
-    loadChildren: () => import('./pages/authorisation/authorisation.module').then(m => m.AuthorisationModule)
+    loadChildren: () => import('./shared/components/authorisation/authorisation.module').then(m => m.AuthorisationModule)
   },
   {
     path: '',
