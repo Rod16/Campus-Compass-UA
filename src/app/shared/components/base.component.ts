@@ -4,6 +4,7 @@ import { takeUntil } from 'rxjs/operators';
 
 @Injectable()
 export abstract class BaseComponent implements OnDestroy {
+  public isLoading = false;
   public unsubscribeOnComponentDestroy$: Subject<void> = new Subject();
   public unsubscribeOnComponentDestroyTakeUntil$ = takeUntil(this.unsubscribeOnComponentDestroy$);
 

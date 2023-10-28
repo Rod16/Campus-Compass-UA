@@ -1,0 +1,43 @@
+<ion-content [fullscreen]="true">
+  <form [formGroup]="subjectForm">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Створення навчальної дисципліни</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-item>
+          <ion-input formControlName="subject" type="text" label="Назва навчальної дисципліни"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input formControlName="course" type="number" label="Курс"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Вибір викладача</ion-label>
+          <ionic-selectable
+            formControlName="teacher"
+            [items]="teachersArray"
+            [isMultiple]="false"
+            itemTextField="name"
+            [canSearch]="true"
+          >
+          </ionic-selectable>
+        </ion-item>
+        <ion-item>
+          <ion-input formControlName="groups" type="text" label="Вибір навчальної групи"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Вибір індивідуальних студентів</ion-label>
+          <ionic-selectable
+            formControlName="students"
+            [items]="studentsArray"
+            itemTextField="name"
+            [canSearch]="true"
+            [isMultiple]="true"
+          >
+          </ionic-selectable>
+        </ion-item>
+        <ion-button [disabled]="isLoading" (click)="saveSubject()">Зберегти</ion-button>
+      </ion-card-content>
+    </ion-card>
+  </form>
+</ion-content>

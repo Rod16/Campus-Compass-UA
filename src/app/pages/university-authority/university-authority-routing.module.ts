@@ -9,6 +9,7 @@ import {UsersListComponent} from "./users-list/users-list.component";
 import {UserEditDataResolver} from "./resolvers/user-edit-data-resolver";
 import {UserInfoComponent} from "../../shared/components/user-info/user-info.component";
 import {StudentGradeResolver} from "../teacher/resolvers/student-grade.resolver";
+import {CreateSubjectComponent} from "./create-subject/create-subject.component";
 
 const routes: Routes = [
   {
@@ -28,6 +29,13 @@ const routes: Routes = [
       {
         path: ':id/users',
         component: UsersListComponent,
+        resolve: {
+          userInfo: UserBasicDataResolver
+        },
+      },
+      {
+        path: ':id/create-subject',
+        component: CreateSubjectComponent,
         resolve: {
           userInfo: UserBasicDataResolver
         },

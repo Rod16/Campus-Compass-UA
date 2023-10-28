@@ -5,17 +5,20 @@ import {map, Observable, switchMap} from "rxjs";
 import {SharedService} from "../../../shared/services/shared.service";
 import {PageAction} from "../enums/page-action";
 import {UserRole} from "../../../shared/enums/user-role";
+import {BaseComponent} from "../../../shared/components/base.component";
+import {IGrade} from "../../../shared/interfaces/grade-data";
 
 @Injectable({providedIn: 'root'})
-export class UniversityAuthorityService {
+export class UniversityAuthorityService extends BaseComponent {
 
   constructor(private fireStore: AngularFirestore, private sharedService: SharedService) {
+    super();
   }
 
   getFacultyStudents(university: string, faculty: string) {
     const query = this.fireStore.collection<IUserInfo>('user-info', ref =>
       ref.where('faculty', '==', faculty).where('university', '==', university).where('role', '==', UserRole.Student));
-    return query.get().pipe(switchMap(snapshot => {
+    return query.get().pipe(map(snapshot => {
       return snapshot.docs.length > 0 ? snapshot.docs.map(student => student.data()) : [];
     }));
   }
@@ -23,7 +26,7 @@ export class UniversityAuthorityService {
   getTeachers(university: string) {
     const query = this.fireStore.collection<IUserInfo>('user-info', ref =>
       ref.where('university', '==', university).where('role', '==', UserRole.Teacher));
-    return query.get().pipe(switchMap(snapshot => {
+    return query.get().pipe(map(snapshot => {
       return snapshot.docs.length > 0 ? snapshot.docs.map(teacher => teacher.data()) : [];
     }));
   }
@@ -87,8 +90,54 @@ export class UniversityAuthorityService {
             //this.sharedService.presentToast('Please fill all the required fields');
       });
     } else {
-      this.fireStore.collection('user-info').doc(user.uid).update(user).then(() => {//this.sharedService.presentToast('Please fill all the required fields');;
-    });
+      this.fireStore.collection('user-info').doc(user.uid).update(user).then(() => {
+        //this.sharedService.presentToast('Please fill all the required fields');
+        });
+    }
   }
 
-}}
+  addSubject(subject: string, teacher: IUserInfo, course: number, students?: IUserInfo[], groups?: string) {
+    this.isLoading = true;
+    let gradesArray: {student: string, grades: IGrade[]}[] = [];
+    if (groups?.length && groups.length > 0) {
+      const parsedGroups = groups.split(',').map((group) => group.trim());
+      const query = this.fireStore.collection<IUserInfo>('user-info', ref =>
+        ref.where('university', '==', teacher.university)
+          .where('role', '==', UserRole.Student)
+          .where('group', 'in', parsedGroups));
+      return super.unsubscribeOnComponentDestroy(query.get()).pipe(map(snapshot => {
+        return snapshot.docs.length > 0 ? snapshot.docs.map(student => student.data()) : [];
+      })).subscribe((groupStudents: IUserInfo[]) => {
+        groupStudents.forEach((student) => {
+          gradesArray.push({student: student.uid, grades: []});
+        });
+        if (students) {
+          students.forEach((student) => {
+            gradesArray.push({student: student.uid, grades: []});
+          });
+        }
+        this.fireStore.collection('teacher-student-connections').doc(`${teacher.university}-${teacher.uid}-${subject}-${course}`).set({
+          subject: subject,
+          teacher: teacher,
+          gradesArray: gradesArray,
+        }).then(() => {
+          this.isLoading = false;
+        });
+      });
+    } else {
+      if (students && students.length > 0) {
+        for (let i = 0; i < students?.length; i++) {
+          gradesArray.push({student: students[i].uid, grades: []});
+        }
+        this.fireStore.collection('teacher-student-connections').doc(`${teacher.university}-${teacher.uid}-${subject}-${course}`).set({
+          subject: subject,
+          teacher: teacher,
+          gradesArray: gradesArray,
+        }).then(() => {
+          this.isLoading = false;
+        });
+      }
+      return;
+    }
+  }
+}

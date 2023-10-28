@@ -32,16 +32,16 @@ export class CreateCertificateComponent extends BaseComponent implements OnInit 
     super.unsubscribeOnComponentDestroy(this.route.data).pipe(switchMap((details: Data) => {
       this.userInfo = details['userInfo'];
       return this.universityAuthorityService.getFacultyStudents(this.userInfo.university as string, this.userInfo.faculty as string);
-    })).subscribe((student) => {
-      this.studentArray.push(student);
+    })).subscribe((students: IUserInfo[]) => {
+      this.studentArray = students;
     });
   }
 
   public segmentChanged(e: any) {
     this.selectedRole = e.detail.value;
     if (this.selectedRole === Role.Teacher && this.teacherArray.length === 0) {
-      super.unsubscribeOnComponentDestroy(this.universityAuthorityService.getTeachers(this.userInfo.university as string)).subscribe((teacher) => {
-        this.teacherArray.push(teacher);
+      super.unsubscribeOnComponentDestroy(this.universityAuthorityService.getTeachers(this.userInfo.university as string)).subscribe((teachers: IUserInfo[]) => {
+        this.teacherArray = teachers;
       });
     }
   }
