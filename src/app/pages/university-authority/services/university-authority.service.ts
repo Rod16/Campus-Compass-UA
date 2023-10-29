@@ -116,6 +116,7 @@ export class UniversityAuthorityService extends BaseComponent {
             gradesArray.push({student: student.uid, grades: []});
           });
         }
+        gradesArray = [...new Map(gradesArray.map(v => [v.student, v])).values()]
         this.fireStore.collection('teacher-student-connections').doc(`${teacher.university}-${teacher.uid}-${subject}-${course}`).set({
           subject: subject,
           teacher: teacher,
