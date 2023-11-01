@@ -35,9 +35,7 @@ export class SharedService {
   }
 
   signOut(): void {
-    this.auth.signOut().then(() => {
-      this.router.navigate(["/authorisation"]);
-    });
+    this.router.navigate(["/authorisation"]);
   }
 
   generateRandomId(): void {

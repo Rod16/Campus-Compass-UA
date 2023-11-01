@@ -1,23 +1,22 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot } from '@angular/router';
-import {SharedService} from "../../../shared/services/shared.service";
+import {IGroupStudents} from "../interfaces/group-students";
+import {combineLatest, Observable, of, switchMap} from "rxjs";
+import {ISubjectStudentsList} from "../interfaces/teacher-data";
 import {IUserInfo} from "../../../shared/interfaces/user-info";
-import {map, Observable, switchMap} from "rxjs";
+import {SharedService} from "../../../shared/services/shared.service";
 import {TeacherService} from "../services/teacher.service";
 import {IGradeData, ISubjectData} from "../../../shared/interfaces/grade-data";
-import {IGradeDataExtended} from "../interfaces/grade-data-extended";
 
 @Injectable({ providedIn: 'root' })
-export class StudentGradeResolver {
+export class SubjectsResolver {
   constructor(private sharedService: SharedService, private teacherService: TeacherService) {
   }
 
-  resolve(route: ActivatedRouteSnapshot): Observable<ISubjectData> {
-    const studentId = route.paramMap.get('studentId') as string;
-    const subject = route.paramMap.get('subject') as string;
+  resolve(route: ActivatedRouteSnapshot): Observable<ISubjectData[]> {
     return this.sharedService.getUser(route.paramMap.get('id') as string).pipe(switchMap((userInfoData) => {
       const userInfo = userInfoData as IUserInfo;
-      return this.teacherService.getSubjectData(userInfo, studentId, subject)
+      return this.teacherService.getTeacherSubjects(userInfo)
     }));
   }
 }

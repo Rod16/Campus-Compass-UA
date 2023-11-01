@@ -98,7 +98,7 @@ export class UniversityAuthorityService extends BaseComponent {
 
   addSubject(subject: string, teacher: IUserInfo, course: number, students?: IUserInfo[], groups?: string) {
     this.isLoading = true;
-    let gradesArray: {student: string, grades: IGrade[]}[] = [];
+    let gradesArray: {student: IUserInfo, grades: IGrade[]}[] = [];
     if (groups?.length && groups.length > 0) {
       const parsedGroups = groups.split(',').map((group) => group.trim());
       const query = this.fireStore.collection<IUserInfo>('user-info', ref =>
@@ -109,17 +109,19 @@ export class UniversityAuthorityService extends BaseComponent {
         return snapshot.docs.length > 0 ? snapshot.docs.map(student => student.data()) : [];
       })).subscribe((groupStudents: IUserInfo[]) => {
         groupStudents.forEach((student) => {
-          gradesArray.push({student: student.uid, grades: []});
+          gradesArray.push({student: student, grades: []});
         });
         if (students) {
           students.forEach((student) => {
-            gradesArray.push({student: student.uid, grades: []});
+            gradesArray.push({student: student, grades: []});
           });
         }
         gradesArray = [...new Map(gradesArray.map(v => [v.student, v])).values()]
         this.fireStore.collection('teacher-student-connections').doc(`${teacher.university}-${teacher.uid}-${subject}-${course}`).set({
           subject: subject,
           teacher: teacher,
+          course: course,
+          university: teacher.university,
           gradesArray: gradesArray,
         }).then(() => {
           this.isLoading = false;
@@ -128,11 +130,13 @@ export class UniversityAuthorityService extends BaseComponent {
     } else {
       if (students && students.length > 0) {
         for (let i = 0; i < students?.length; i++) {
-          gradesArray.push({student: students[i].uid, grades: []});
+          gradesArray.push({student: students[i], grades: []});
         }
         this.fireStore.collection('teacher-student-connections').doc(`${teacher.university}-${teacher.uid}-${subject}-${course}`).set({
           subject: subject,
           teacher: teacher,
+          course: course,
+          university: teacher.university,
           gradesArray: gradesArray,
         }).then(() => {
           this.isLoading = false;

@@ -1,23 +1,14 @@
 <ion-content [fullscreen]="true" *ngIf="studentData">
-  <div *ngFor="let subject of studentData.subjectsArray">
+  <div *ngFor="let subject of studentData">
     <ion-card>
       <ion-card-header>
-        <ion-card-title>{{subject.subjectName}}</ion-card-title>
+        <ion-card-title>{{subject.subject}}</ion-card-title>
       </ion-card-header>
       <ion-card-content>
-        <div *ngIf="!subject.groups || subject.groups?.length === 0">
-          <p>There are no groups for this subject</p>
-        </div>
-        <div *ngIf="subject.groups && subject.groups.length > 0">
-          <p>Groups:</p>
-          <div *ngFor="let group of subject.groups">
-            <p [routerLink]="subject.subjectName + '/' + group">{{group}}</p>
-          </div>
-        </div>
-        <div *ngIf="subject.individualStudents">
-          <p>Individual students:</p>
-          <div *ngFor="let student of individualStudentsArray">
-            <p [routerLink]="subject.subjectName + '/student/' + student.uid">{{student.name}}</p>
+        <div *ngIf="subject.students">
+          <p>Студенти:</p>
+          <div *ngFor="let student of subject.students">
+            <p [routerLink]="subject.subject + '/student/' + student.uid">{{student.name}}</p>
           </div>
         </div>
       </ion-card-content>

@@ -1,0 +1,44 @@
+<ion-content [fullscreen]="true">
+  <ion-title>Ваші навчальні дисципліни</ion-title>
+  <ion-card *ngFor="let subject of subjectArray; let i = index">
+    <ion-card-header>
+      <div class="d-flex justify-content-between">
+        <ion-card-title>{{subject.subject}}</ion-card-title>
+        <ion-button (click)="toggleModal(subject, i)" style="width: 100px">Редагувати</ion-button>
+      </div>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-label>Поля для виставлення оцінок:</ion-label>
+      <ion-list>
+        <ion-item *ngFor="let field of subject.gradesArray[0].grades">
+          <ion-label>{{field.title}}</ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+<ion-modal [isOpen]="isModalOpen">
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>{{chosenSubject.subject}}</ion-title>
+        <ion-button (click)="saveFields()">Зберегти</ion-button>
+        <ion-buttons slot="end">
+          <ion-button (click)="toggleModal(chosenSubject, subjectIndex)">Close</ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding">
+      <ion-title>Поля для виставлення оцінок</ion-title>
+      <div *ngFor="let field of chosenSubject.gradesArray[0].grades">
+        <ion-label>{{field.title}}</ion-label>
+      </div>
+      <ion-title>Додати нові поля</ion-title>
+      <div *ngFor="let control of subjectsFormControlArray">
+        <ion-input [formControl]="control" />
+      </div>
+      <ion-button (click)="addNewField()">Додати поле</ion-button>
+<!--      <ion-button *ngIf="isRejected" (click)="confirmRejection(chosenCertificate)">Підтвердити</ion-button>-->
+    </ion-content>
+  </ng-template>
+</ion-modal>

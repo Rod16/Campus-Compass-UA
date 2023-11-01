@@ -2,11 +2,11 @@
   <div *ngIf="studentData">
     <ion-card>
       <ion-card-header>
-        <ion-card-title>{{studentData.gradeData.subject}}</ion-card-title>
+        <ion-card-title>{{subjectData.subject}}</ion-card-title>
       </ion-card-header>
       <ion-card-content>
         <ion-list>
-          <ion-item *ngFor="let grade of studentData.gradeData.grades; let i = index">
+          <ion-item *ngFor="let grade of studentData.grades; let i = index">
             <ion-label>{{grade.title}}</ion-label>
             <input [formControl]="formControlsArray[i]" />
           </ion-item>

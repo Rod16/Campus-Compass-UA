@@ -10,6 +10,8 @@ import {GroupStudentsResolver} from "./resolvers/group-students.resolver";
 import {GroupStudentsComponent} from "./group-students/group-students.component";
 import {StudentListResolver} from "./resolvers/student-list.resolver";
 import {UserInfoComponent} from "../../shared/components/user-info/user-info.component";
+import {ViewSubjectsComponent} from "./view-subjects/view-subjects.component";
+import {SubjectsResolver} from "./resolvers/subjects.resolver";
 
 const routes: Routes = [
   {
@@ -33,6 +35,13 @@ const routes: Routes = [
         resolve: {
           userInfo: UserBasicDataResolver,
           groupStudents: GroupStudentsResolver
+        },
+      },
+      {
+        path: ':id/view-subjects',
+        component: ViewSubjectsComponent,
+        resolve: {
+          subjects: SubjectsResolver,
         },
       },
       {

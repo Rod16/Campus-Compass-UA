@@ -6,6 +6,7 @@ import {TeacherService} from "../services/teacher.service";
 import {ISubjectStudentsList} from "../interfaces/teacher-data";
 import {StudentService} from "../../student/services/student.service";
 import {BaseComponent} from "../../../shared/components/base.component";
+import {ITeacherGrades} from "../../../shared/interfaces/grade-data";
 
 @Component({
   selector: 'app-student',
@@ -14,8 +15,7 @@ import {BaseComponent} from "../../../shared/components/base.component";
 })
 export class TeacherGradesComponent extends BaseComponent implements OnInit {
   public userInfo!: IUserInfo;
-  public studentData!: ISubjectStudentsList;
-  public individualStudentsArray: IUserInfo[] = [];
+  public studentData!: ITeacherGrades[];
 
   constructor(private route: ActivatedRoute, public teacherService: TeacherService, private studentService: StudentService, private fireStore: AngularFirestore) {
     super();
@@ -24,15 +24,6 @@ export class TeacherGradesComponent extends BaseComponent implements OnInit {
   ngOnInit() {
     super.unsubscribeOnComponentDestroy(this.route.data).subscribe((details: Data) => {
       this.studentData = details['studentData'];
-      if (this.studentData) {
-        this.studentData.subjectsArray.forEach((item) => {
-          super.unsubscribeOnComponentDestroy(this.teacherService.getIndividualStudents(item.individualStudents as string[])).subscribe((doc) => {
-            doc.docs.forEach((item) => {
-              this.individualStudentsArray.push(item.data() as IUserInfo);
-            });
-          });
-        })
-      }
     })
   }
 
