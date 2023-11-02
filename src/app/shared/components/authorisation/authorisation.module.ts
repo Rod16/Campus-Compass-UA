@@ -8,7 +8,6 @@ import { HomePageRoutingModule } from './authorisation-routing.module';
 import {AngularFireAuthModule} from "@angular/fire/compat/auth";
 import {AngularFireModule} from "@angular/fire/compat";
 import {AngularFireDatabaseModule} from "@angular/fire/compat/database";
-import {RegistrationFormComponent} from "./registration-form/registration-form.component";
 import {environment} from "../../../../environments/environment";
 import {EntryFieldsModule} from "../../entry-fields/entry-fields.module";
 
@@ -25,6 +24,6 @@ import {EntryFieldsModule} from "../../entry-fields/entry-fields.module";
     EntryFieldsModule,
   ],
   providers: [AngularFireAuthModule],
-  declarations: [AuthorisationComponent, RegistrationFormComponent]
+  declarations: [AuthorisationComponent]
 })
 export class AuthorisationModule {}

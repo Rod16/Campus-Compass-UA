@@ -1,8 +1,6 @@
 import {Component, NgZone} from '@angular/core';
 import {FormBuilder} from "@angular/forms";
-import {Firestore} from "@angular/fire/firestore";
 import {Router} from "@angular/router";
-import {AngularFireAuth} from "@angular/fire/compat/auth";
 import {AuthorisationService} from "./services/authorisation.service";
 import {BaseComponent} from "../base.component";
 import {IUserInfo} from "../../interfaces/user-info";
@@ -20,19 +18,11 @@ export class AuthorisationComponent extends BaseComponent {
     password: ['']
   })
   private userInfo!: IUserInfo;
-  constructor(private fb: FormBuilder, private firestore: Firestore, private router: Router, private auth: AngularFireAuth, private zone: NgZone, public sharedService: SharedService, private authorisationService: AuthorisationService) {
+  constructor(private fb: FormBuilder, private router: Router, public sharedService: SharedService, private authorisationService: AuthorisationService) {
     super();
   }
 
   public signIn() {
-    // this.auth
-    //   .signInWithEmailAndPassword(this.authForm.get('email')?.value as string, this.authForm.get('password')?.value as string)
-    //   .then((user) => {
-    //     this.navigateByRole(user);
-    //   })
-    //   .catch((error: any) => {
-    //     alert(error.message);
-    //   });
     super.unsubscribeOnComponentDestroy(this.authorisationService.login(this.authForm.get('email')?.value as string, this.authForm.get('password')?.value as string)).subscribe((user) => {
       if (user) {
         this.navigateByRole(user);

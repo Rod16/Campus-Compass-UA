@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot } from '@angular/router';
-import {combineLatest, Observable, of, switchMap} from "rxjs";
+import {Observable, switchMap} from "rxjs";
 import {SharedService} from "../../../shared/services/shared.service";
 import {IUserInfo} from "../../../shared/interfaces/user-info";
 import {IGradeData, ISubjectData} from "../../../shared/interfaces/grade-data";

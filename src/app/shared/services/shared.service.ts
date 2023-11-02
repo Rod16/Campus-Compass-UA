@@ -4,7 +4,6 @@ import {initializeApp} from "@angular/fire/app";
 import {environment} from "../../../environments/environment";
 import {AngularFirestore} from "@angular/fire/compat/firestore";
 import {IUserInfo} from "../interfaces/user-info";
-import {AngularFireAuth} from "@angular/fire/compat/auth";
 import {Router} from "@angular/router";
 import {of, switchMap} from "rxjs";
 import * as CryptoJS from 'crypto-js';
@@ -15,7 +14,7 @@ export class SharedService {
   id = '';
   encryptSecretKey = 'secret-key'
 
-  constructor(private fireStore: AngularFirestore, private auth: AngularFireAuth, private router: Router) {
+  constructor(private fireStore: AngularFirestore, private router: Router) {
   }
 
   getScreenWidth(): number {

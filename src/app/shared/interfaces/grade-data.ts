@@ -1,5 +1,4 @@
 import {IUserInfo} from "./user-info";
-import {Observable} from "rxjs";
 
 export interface IGradeData {
   subject: string;

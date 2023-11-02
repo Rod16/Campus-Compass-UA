@@ -2,10 +2,9 @@ import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot } from '@angular/router';
 import {SharedService} from "../../../shared/services/shared.service";
 import {IUserInfo} from "../../../shared/interfaces/user-info";
-import {map, Observable, switchMap} from "rxjs";
+import {Observable, switchMap} from "rxjs";
 import {TeacherService} from "../services/teacher.service";
-import {IGradeData, ISubjectData} from "../../../shared/interfaces/grade-data";
-import {IGradeDataExtended} from "../interfaces/grade-data-extended";
+import {ISubjectData} from "../../../shared/interfaces/grade-data";
 
 @Injectable({ providedIn: 'root' })
 export class StudentGradeResolver {

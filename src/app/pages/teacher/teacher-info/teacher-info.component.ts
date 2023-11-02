@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Data} from "@angular/router";
-import {QuerySnapshot} from "@angular/fire/compat/firestore";
 import {IUserInfo} from "../../../shared/interfaces/user-info";
 import {SharedService} from "../../../shared/services/shared.service";
 import {BaseComponent} from "../../../shared/components/base.component";

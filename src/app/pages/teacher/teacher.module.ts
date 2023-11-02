@@ -8,7 +8,6 @@ import {TeacherRoutingModule} from './teacher-routing.module';
 import {TeacherInfoComponent} from "./teacher-info/teacher-info.component";
 import {TeacherGradesComponent} from "./teacher-grades/teacher-grades.component";
 import {SetGradeComponent} from "./set-grade/set-grade.component";
-import {GroupStudentsComponent} from "./group-students/group-students.component";
 import {SharedModule} from "../../shared/shared.module";
 import {ViewSubjectsComponent} from "./view-subjects/view-subjects.component";
 
@@ -22,6 +21,6 @@ import {ViewSubjectsComponent} from "./view-subjects/view-subjects.component";
         ReactiveFormsModule,
         SharedModule
     ],
-  declarations: [TeacherMainComponent, TeacherInfoComponent, TeacherGradesComponent, SetGradeComponent, GroupStudentsComponent, ViewSubjectsComponent]
+  declarations: [TeacherMainComponent, TeacherInfoComponent, TeacherGradesComponent, SetGradeComponent, ViewSubjectsComponent]
 })
 export class TeacherModule {}

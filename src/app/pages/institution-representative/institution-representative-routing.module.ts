@@ -5,7 +5,6 @@ import {UserBasicDataResolver} from "../../shared/resolvers/user-basic-data.reso
 import {ViewCertificateComponent} from "./view-certificate/view-certificate.component";
 import {InstitutionRepresentativeInfoComponent} from "./university-authority-info/institution-representative-info.component";
 import {UserInfoComponent} from "../../shared/components/user-info/user-info.component";
-import {StudentGradeResolver} from "../teacher/resolvers/student-grade.resolver";
 
 const routes: Routes = [
   {

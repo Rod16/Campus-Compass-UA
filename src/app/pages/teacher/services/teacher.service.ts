@@ -12,27 +12,6 @@ export class TeacherService {
   constructor(private fireStore: AngularFirestore, private sharedService: SharedService) {
   }
 
-  getTeacherData() {
-    return this.fireStore.collection('teachers-data').get();
-  }
-
-  getIndividualStudents(uidArray: string[]) {
-    const query = this.fireStore.collection<IUserInfo>('user-info', ref =>
-      ref.where('uid', 'in', uidArray));
-    return query.get();
-  }
-
-  getGradesDocumentByStudentId(student: IUserInfo, subject: string) {
-    const documentKey = `${student.university}-${student.faculty}-${student.group}-${student.uid}-grades-${subject}`;
-    return this.fireStore.collection('students-data').doc(documentKey).get();
-  }
-
-  getStudentsByGroup(groupId: string, university: string) {
-    const query = this.fireStore.collection<IUserInfo>('user-info', ref =>
-      ref.where('group', '==', groupId).where('university', '==', university));
-    return query.get();
-  }
-
   updateGrades(subjectData: ISubjectData) {
     const documentKey = `${subjectData.teacher.university}-${subjectData.teacher.uid}-${subjectData.subject}-${subjectData.course}`;
     return this.fireStore.collection('teacher-student-connections').doc(documentKey).update(subjectData);
