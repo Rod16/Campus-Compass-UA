@@ -1,9 +1,8 @@
 import {Injectable} from "@angular/core";
-import {AngularFirestore, DocumentSnapshot} from "@angular/fire/compat/firestore";
+import {AngularFirestore} from "@angular/fire/compat/firestore";
 import {IUserInfo} from "../../../shared/interfaces/user-info";
-import {IGradeData, ISubjectData} from "../../../shared/interfaces/grade-data";
-import {filter, map, Observable, switchMap} from "rxjs";
-import {fileTray} from "ionicons/icons";
+import {ISubjectData} from "../../../shared/interfaces/grade-data";
+import {map, Observable, switchMap} from "rxjs";
 import {SharedService} from "../../../shared/services/shared.service";
 
 @Injectable({providedIn: 'root'})
