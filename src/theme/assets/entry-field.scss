@@ -27,3 +27,11 @@
     width: 60%;
   }
 }
+
+.has-focus.ion-valid.sc-ion-input-md-h, .ion-touched.ion-invalid.sc-ion-input-md-h {
+  --highlight-color: var(--ion-color-primary);
+}
+
+.input-highlight {
+  background: transparent !important;
+}
