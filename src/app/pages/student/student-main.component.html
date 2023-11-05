@@ -1,17 +1,51 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title *ngIf="userInfo">
-      {{userInfo.name}}
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+<div class="ion-page" id="main-content">
+  <ion-header [translucent]="true" *ngIf="sharedService.getScreenWidth().valueOf() < 800">
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button color="primary"></ion-menu-button>
+      </ion-buttons>
+      <ion-buttons slot="end">
+        <ion-icon name="person-circle-outline" color="primary" (click)="presentPopover($event)" class="account-icon me-3"></ion-icon>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
 
-<ion-content>
-  <div>
-    <a [routerLink]="['/user-info']"><p>Документи</p></a>
-    <a [routerLink]="['/grades']"><p>Поточна успішність</p></a>
-  </div>
+  <ion-content>
+    <div class="d-flex">
+      <ion-list *ngIf="sharedService.getScreenWidth().valueOf() >= 800" class="sidebar-nav">
+        <div>
+          <p *ngFor="let navigationItem of navigationData" routerLink="{{navigationItem.link}}" class="d-flex align-items-center l1 mx-5 mb-2">
+            <ion-icon name="{{navigationItem.icon}}" class="icon-40px"></ion-icon>
+            <span style="margin-left: 50px">{{navigationItem.title}}</span>
+          </p>
+        </div>
+        <p (click)="signOut()" class="sign-out l1">Вийти</p>
+      </ion-list>
+      <ion-list class="content">
+        <ion-router-outlet [animated]="true"></ion-router-outlet>
+      </ion-list>
+    </div>
+  </ion-content>
+</div>
 
-  <router-outlet></router-outlet>
-</ion-content>
+<ion-menu contentId="main-content">
+  <ion-content class="ion-padding menu">
+    <ion-menu-toggle>
+      <ion-icon name="close-outline" class="ms-3 mt-4 mb-5" size="large"></ion-icon>
+      <p *ngFor="let navigationItem of navigationData" routerLink="{{navigationItem.link}}" class="d-flex align-items-center l1 mx-3">
+        <span>{{navigationItem.title}}</span>
+      </p>
+    </ion-menu-toggle>
+  </ion-content>
+</ion-menu>
+
+<ion-popover #popover [isOpen]="isPopoverOpen" triggerAction="click" (didDismiss)="isPopoverOpen = false" dismissOnSelect="true">
+  <ng-template>
+    <ion-content class="ion-padding l2">
+      <p [routerLink]="['account']"><ion-label>Кабінет користувача</ion-label></p>
+      <hr class="bg-primary" />
+      <p (click)="signOut()"><ion-label color="secondary">Вийти</ion-label></p>
+    </ion-content>
+  </ng-template>
+</ion-popover>
 

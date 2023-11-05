@@ -6,31 +6,59 @@ import {UserBasicDataResolver} from "../../shared/resolvers/user-basic-data.reso
 import {StudentInfoComponent} from "./student-info/student-info.component";
 import {StudentGradeResolver} from "./resolvers/student-grade.resolver";
 import {UserInfoComponent} from "../../shared/components/user-info/user-info.component";
+import {ParentDataResolver} from "../../shared/resolvers/parent-data.resolver";
+import {INavigationData} from "../../shared/interfaces/navigation-data";
+
+const NAVIGATION_DATA: INavigationData[] = [
+  {
+    title: 'Головна',
+    icon: 'home-outline',
+    link: './info'
+  },
+  {
+    title: 'Поточна успішність',
+    icon: 'star-outline',
+    link: 'grades'
+  },
+  {
+    title: 'Інформація про користувача',
+    icon: 'person-circle-outline',
+    link: 'account'
+  }
+]
 
 const routes: Routes = [
   {
-    path: '',
+    path: ':id',
     component: StudentMainComponent,
     resolve: {
       userInfo: UserBasicDataResolver
     },
+    data: {
+      navigation: NAVIGATION_DATA
+    },
     children: [
       {
-        path: ':id',
+        path: '',
+        redirectTo: 'info',
+        pathMatch: "full"
+      },
+      {
+        path: 'info',
         component: StudentInfoComponent,
         resolve: {
           userInfo: UserBasicDataResolver
         },
       },
       {
-        path: ':id/account',
+        path: 'account',
         component: UserInfoComponent,
         resolve: {
-          userInfo: UserBasicDataResolver
+          userInfo: ParentDataResolver
         },
       },
       {
-        path: ':id/grades',
+        path: 'grades',
         component: StudentGradeComponent,
         resolve: {
           studentGrades: StudentGradeResolver
