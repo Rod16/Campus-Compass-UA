@@ -1,0 +1,19 @@
+<ion-content class="w-100" [fullscreen]="true" *ngIf="userInfo">
+  <span class="d-flex justify-content-center f25-1" [ngClass]="sharedService.getScreenWidth().valueOf() > 800 ? 'mt-216px' : 'mt-5'">{{userInfo.name}}</span>
+  <div *ngIf="sharedService.getScreenWidth().valueOf() >= 800" class="d-flex align-items-center flex-wrap mt-4 wide-main-container gap-6">
+    <ion-button *ngFor="let navigationItem of navigationData" [routerLink]="'../' + navigationItem.link" color="medium" fill="outline" class="d-flex flex-column w-163px h-175px">
+      <ion-list>
+        <ion-icon [name]="navigationItem.icon" color="primary" class="icon-48px mb-2"></ion-icon>
+        <p class="l1 text-default m-0 text-black ion-text-wrap">{{navigationItem.title}}</p>
+      </ion-list>
+    </ion-button>
+  </div>
+  <div *ngIf="sharedService.getScreenWidth().valueOf() < 800" class="mt-5">
+    <ion-button *ngFor="let navigationItem of navigationData" [routerLink]="'../' + navigationItem.link" color="medium" fill="outline" class="mx-3 h-72px mobile-nav-item">
+      <div class="d-flex align-items-center w-100">
+        <ion-icon [name]="navigationItem.icon" color="primary" class="icon-40px me-3"></ion-icon>
+        <p class="l1 text-default m-0 text-black ion-text-wrap">{{navigationItem.title}}</p>
+      </div>
+    </ion-button>
+  </div>
+</ion-content>

@@ -1,0 +1,11 @@
+.mobile-nav-item {
+  width: calc(100% - 48px);
+  text-align: left;
+  --border-radius: 10px;
+}
+
+.wide-main-container {
+  width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}

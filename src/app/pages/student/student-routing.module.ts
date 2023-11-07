@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { StudentMainComponent } from './student-main.component';
+import { NavigationWrapperComponent } from '../../shared/components/navigation-wrapper/navigation-wrapper.component';
 import {StudentGradeComponent} from "./student-grade/student-grade.component";
 import {UserBasicDataResolver} from "../../shared/resolvers/user-basic-data.resolver";
-import {StudentInfoComponent} from "./student-info/student-info.component";
+import {HomeComponent} from "../../shared/components/home/home.component";
 import {StudentGradeResolver} from "./resolvers/student-grade.resolver";
 import {UserInfoComponent} from "../../shared/components/user-info/user-info.component";
 import {ParentDataResolver} from "../../shared/resolvers/parent-data.resolver";
@@ -30,7 +30,7 @@ const NAVIGATION_DATA: INavigationData[] = [
 const routes: Routes = [
   {
     path: ':id',
-    component: StudentMainComponent,
+    component: NavigationWrapperComponent,
     resolve: {
       userInfo: UserBasicDataResolver
     },
@@ -40,14 +40,17 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'info',
+        redirectTo: 'home',
         pathMatch: "full"
       },
       {
-        path: 'info',
-        component: StudentInfoComponent,
+        path: 'home',
+        component: HomeComponent,
         resolve: {
-          userInfo: UserBasicDataResolver
+          userInfo: ParentDataResolver
+        },
+        data: {
+          navigation: NAVIGATION_DATA
         },
       },
       {

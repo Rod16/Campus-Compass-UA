@@ -1,17 +1,17 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Data} from "@angular/router";
-import {IUserInfo} from "../../shared/interfaces/user-info";
-import {BaseComponent} from "../../shared/components/base.component";
-import {SharedService} from "../../shared/services/shared.service";
+import {IUserInfo} from "../../interfaces/user-info";
+import {BaseComponent} from "../base.component";
+import {SharedService} from "../../services/shared.service";
 import {IonPopover, MenuController} from "@ionic/angular";
-import {INavigationData} from "../../shared/interfaces/navigation-data";
+import {INavigationData} from "../../interfaces/navigation-data";
 
 @Component({
   selector: 'app-student',
-  templateUrl: 'student-main.component.html',
-  styleUrls: ['student-main.component.scss'],
+  templateUrl: 'navigation-wrapper.component.html',
+  styleUrls: ['navigation-wrapper.component.scss'],
 })
-export class StudentMainComponent extends BaseComponent implements OnInit {
+export class NavigationWrapperComponent extends BaseComponent implements OnInit {
   @ViewChild('popover') popover!: IonPopover;
   public userInfo!: IUserInfo;
   public isPopoverOpen = false;
