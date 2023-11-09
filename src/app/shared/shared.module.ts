@@ -5,6 +5,7 @@ import {AuthorisationModule} from "./components/authorisation/authorisation.modu
 import {UserInfoComponent} from "./components/user-info/user-info.component";
 import {NavigationWrapperComponent} from "./components/navigation-wrapper/navigation-wrapper.component";
 import {RouterModule} from "@angular/router";
+import {HomeComponent} from "./components/home/home.component";
 
 
 @NgModule({
@@ -14,7 +15,7 @@ import {RouterModule} from "@angular/router";
     AuthorisationModule,
     RouterModule
   ],
-  declarations: [UserInfoComponent, NavigationWrapperComponent],
+  declarations: [UserInfoComponent, NavigationWrapperComponent, HomeComponent],
   exports: [AuthorisationModule]
 })
 export class SharedModule {}

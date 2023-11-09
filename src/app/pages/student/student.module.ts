@@ -5,7 +5,6 @@ import { FormsModule } from '@angular/forms';
 
 import {StudentRoutingModule} from './student-routing.module';
 import {StudentGradeComponent} from "./student-grade/student-grade.component";
-import {HomeComponent} from "../../shared/components/home/home.component";
 import {SharedModule} from "../../shared/shared.module";
 
 
@@ -17,6 +16,6 @@ import {SharedModule} from "../../shared/shared.module";
     StudentRoutingModule,
     SharedModule
   ],
-  declarations: [StudentGradeComponent, HomeComponent]
+  declarations: [StudentGradeComponent]
 })
 export class StudentModule {}

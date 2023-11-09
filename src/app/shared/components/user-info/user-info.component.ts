@@ -3,6 +3,7 @@ import {BaseComponent} from "../base.component";
 import {ActivatedRoute, Data} from "@angular/router";
 import {IUserInfo} from "../../interfaces/user-info";
 import {UserRole} from "../../enums/user-role";
+import {SharedService} from "../../services/shared.service";
 
 @Component({
   selector: 'app-user-info',
@@ -10,7 +11,7 @@ import {UserRole} from "../../enums/user-role";
 })
 export class UserInfoComponent extends BaseComponent {
   public userInfo!: IUserInfo;
-  constructor(private route: ActivatedRoute) {
+  constructor(private route: ActivatedRoute, public sharedService: SharedService) {
     super();
   }
 

@@ -13,7 +13,7 @@ const NAVIGATION_DATA: INavigationData[] = [
   {
     title: 'Головна',
     icon: 'home-outline',
-    link: './info'
+    link: './home'
   },
   {
     title: 'Поточна успішність',

@@ -3,6 +3,7 @@ import {ActivatedRoute, Data} from "@angular/router";
 import {IUserInfo} from "../../../shared/interfaces/user-info";
 import {IGradeData} from "../../../shared/interfaces/grade-data";
 import {BaseComponent} from "../../../shared/components/base.component";
+import {SharedService} from "../../../shared/services/shared.service";
 
 @Component({
   selector: 'app-student',
@@ -13,7 +14,7 @@ export class StudentGradeComponent extends BaseComponent implements OnInit {
   public userInfo!: IUserInfo;
   public studentDataArray: IGradeData[] = [];
 
-  constructor(private route: ActivatedRoute) {
+  constructor(private route: ActivatedRoute, public sharedService: SharedService) {
     super();
   }
 

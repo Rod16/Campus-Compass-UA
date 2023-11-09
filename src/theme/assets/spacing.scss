@@ -1,3 +1,6 @@
+.mt-0 {
+  margin-top: 0;
+}
 .mt-1 {
   margin-top: 1 * $space;
 }
@@ -96,6 +99,10 @@
   margin-right: auto;
 }
 
+.my-0 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
 .my-1 {
   margin-top: 1 * $space;
   margin-bottom: 1 * $space;
@@ -121,6 +128,9 @@
 }
 .p-0 {
   padding: 0;
+}
+.pb-0 {
+  padding-bottom: 0;
 }
 .px-6 {
   padding-left: 48px;
