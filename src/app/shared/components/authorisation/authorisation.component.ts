@@ -6,6 +6,7 @@ import {BaseComponent} from "../base.component";
 import {IUserInfo} from "../../interfaces/user-info";
 import {SharedService} from "../../services/shared.service";
 import {UserRole} from "../../enums/user-role";
+import {ToastTypeEnum} from "../../enums/toast-type";
 
 @Component({
   selector: 'app-authorisation',
@@ -26,6 +27,9 @@ export class AuthorisationComponent extends BaseComponent {
     super.unsubscribeOnComponentDestroy(this.authorisationService.login(this.authForm.get('email')?.value as string, this.authForm.get('password')?.value as string)).subscribe((user) => {
       if (user) {
         this.navigateByRole(user);
+        this.sharedService.presentToast('Вас успішно авторизовано', ToastTypeEnum.Success);
+      } else {
+        this.sharedService.presentToast('Неправильний логін та/або пароль', ToastTypeEnum.Success);
       }
     });
   }

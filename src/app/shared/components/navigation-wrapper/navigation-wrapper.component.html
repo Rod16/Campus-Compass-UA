@@ -14,7 +14,7 @@
     <div *ngIf="sharedService.getScreenWidth().valueOf() >= 800" class="d-flex">
       <ion-list class="sidebar-nav">
         <div>
-          <p *ngFor="let navigationItem of navigationData" routerLink="{{navigationItem.link}}" class="d-flex align-items-center l1 mx-5 mb-2" style="height: 40px">
+          <p *ngFor="let navigationItem of navigationData" routerLink="{{navigationItem.link}}" class="d-flex align-items-center l1 mx-5 mb-2" style="height: 40px; cursor: pointer;">
             <ion-icon name="{{navigationItem.icon}}" class="icon-40px position-absolute"></ion-icon>
             <span style="margin-left: 50px">{{navigationItem.title}}</span>
           </p>

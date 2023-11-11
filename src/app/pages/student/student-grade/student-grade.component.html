@@ -1,31 +1,33 @@
 <ion-content [fullscreen]="true">
-  <p class="d-flex justify-content-center align-items-center f25-1 mb-4" [ngClass]="sharedService.getScreenWidth().valueOf() >= 800 ? 'mt-101px' : 'mt-5'">
-    <ion-icon name="star-outline" color="primary" class="icon-40px me-1"></ion-icon>
-    <span>Поточна успішність</span>
-  </p>
-  <div *ngFor="let subject of studentDataArray">
-    <ion-card class="mb-3 border-medium">
-      <ion-card-header class="pb-0 mb-2">
-        <ion-card-title class="l1 ms-1" color="primary">{{subject.subject}}</ion-card-title>
-      </ion-card-header>
-      <ion-card-content class="p-0">
-        <ion-list class="p-0">
-          <ion-item lines="none" *ngFor="let grade of subject.grades" class="bg-pink mb-1 px-1">
-            <div *ngIf="sharedService.getScreenWidth().valueOf() >= 800" class="w-100 d-flex justify-content-between mx-1">
-              <ion-label class="my-0 l1">{{grade.title}}</ion-label>
-              <ion-label class="my-0 l1">{{grade.mark}}</ion-label>
-              <ion-label class="my-0 l2 text-dark-grey">{{grade.teacher}}</ion-label>
-            </div>
-            <div *ngIf="sharedService.getScreenWidth().valueOf() < 800" class="w-100 my-2 d-flex justify-content-between mx-1">
-              <div>
-                <p class="my-0 l1">{{grade.title}}</p>
-                <p class="my-0 l2 text-dark-grey">{{grade.teacher}}</p>
+  <div [ngClass]="sharedService.getScreenWidth().valueOf() >= 800 ? 'mx-60px' : 'mx-3'">
+    <p class="d-flex justify-content-center align-items-center f25-1 mb-4" [ngClass]="sharedService.getScreenWidth().valueOf() >= 800 ? 'mt-101px' : 'mt-5'">
+      <ion-icon name="star-outline" color="primary" class="icon-40px me-1"></ion-icon>
+      <span>Поточна успішність</span>
+    </p>
+    <div *ngFor="let subject of studentDataArray">
+      <ion-card class="mb-3 border-medium">
+        <ion-card-header class="pb-0 mb-2">
+          <ion-card-title class="l1 ms-1" color="primary">{{subject.subject}}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content class="p-0">
+          <ion-list class="p-0">
+            <ion-item lines="none" *ngFor="let grade of subject.grades" class="bg-pink mb-1 px-1">
+              <div *ngIf="sharedService.getScreenWidth().valueOf() >= 800" class="w-100 d-flex justify-content-between mx-1">
+                <ion-label class="my-0 l1">{{grade.title}}</ion-label>
+                <ion-label class="my-0 l1">{{grade.mark}}</ion-label>
+                <ion-label class="my-0 l2 text-dark-grey">{{grade.teacher}}</ion-label>
               </div>
-              <p class="my-0 l1">{{grade.mark}}</p>
-            </div>
-          </ion-item>
-        </ion-list>
-      </ion-card-content>
-    </ion-card>
+              <div *ngIf="sharedService.getScreenWidth().valueOf() < 800" class="w-100 my-2 d-flex justify-content-between mx-1">
+                <div>
+                  <p class="my-0 l1">{{grade.title}}</p>
+                  <p class="my-0 l2 text-dark-grey">{{grade.teacher}}</p>
+                </div>
+                <p class="my-0 l1">{{grade.mark}}</p>
+              </div>
+            </ion-item>
+          </ion-list>
+        </ion-card-content>
+      </ion-card>
+    </div>
   </div>
 </ion-content>

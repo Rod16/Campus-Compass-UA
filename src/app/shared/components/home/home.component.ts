@@ -24,9 +24,4 @@ export class HomeComponent extends BaseComponent implements OnInit {
       this.navigationData = details['navigation'];
     });
   }
-
-  public signOut() {
-    this.sharedService.signOut();
-  }
-
 }

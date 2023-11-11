@@ -7,6 +7,9 @@ import {IUserInfo} from "../interfaces/user-info";
 import {Router} from "@angular/router";
 import {of, switchMap} from "rxjs";
 import * as CryptoJS from 'crypto-js';
+import {ToastController} from "@ionic/angular";
+import {ToastType} from "../types/toastType";
+import {ToastTypeEnum} from "../enums/toast-type";
 
 @Injectable({providedIn: 'root'})
 export class SharedService {
@@ -14,7 +17,7 @@ export class SharedService {
   id = '';
   encryptSecretKey = 'secret-key'
 
-  constructor(private fireStore: AngularFirestore, private router: Router) {
+  constructor(private fireStore: AngularFirestore, private router: Router, private toastController: ToastController) {
   }
 
   getScreenWidth(): number {
@@ -63,5 +66,25 @@ export class SharedService {
     } catch (e) {
       return Error;
     }
+  }
+
+  async presentToast(message: string, type: ToastType) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 2000,
+      position: 'top',
+      animated: true,
+      buttons: [
+        {
+          icon: 'close-outline',
+          role: 'cancel',
+          cssClass: type === ToastTypeEnum.Success ? 'toast toast-success' : 'toast toast-error',
+        },
+      ],
+      cssClass: type === ToastTypeEnum.Success ? 'toast toast-success' : 'toast toast-error',
+      icon: type === ToastTypeEnum.Success ? 'checkmark-circle-outline' : 'alert-circle-outline'
+    });
+
+    await toast.present();
   }
 }

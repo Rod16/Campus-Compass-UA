@@ -1,0 +1,21 @@
+.toast {
+  --height: 57px;
+  --box-shadow: 0px 10px 40px 0px #E8E8E8;
+  --border-radius: 10px;
+}
+
+.toast-success {
+  --color: #5C9B4C;
+  --background: var(--ion-color-success);
+  &::part(button) {
+    color: #5C9B4C;
+  }
+}
+
+.toast-error {
+  --color: white;
+  --background: var(--ion-color-danger);
+  &::part(button) {
+    color: white;
+  }
+}
