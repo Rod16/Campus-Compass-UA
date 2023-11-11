@@ -23,7 +23,7 @@ export class ViewCertificateComponent extends BaseComponent implements OnInit {
   public isRejected = false;
   public _reload = true;
 
-  constructor(private route: ActivatedRoute, public sharedService: SharedService, private institutionRepresentativeService: InstitutionRepresentativeService, private fb: FormBuilder, private cdr: ChangeDetectorRef) {
+  constructor(private route: ActivatedRoute, public sharedService: SharedService, private institutionRepresentativeService: InstitutionRepresentativeService, private fb: FormBuilder) {
     super();
   }
 
