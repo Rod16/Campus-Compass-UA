@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Data} from "@angular/router";
 import {IUserInfo} from "../../../shared/interfaces/user-info";
 import {SharedService} from "../../../shared/services/shared.service";
