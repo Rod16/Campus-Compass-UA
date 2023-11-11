@@ -21,7 +21,6 @@ export class ViewCertificateComponent extends BaseComponent implements OnInit {
   public searchTerm = this.fb.control('');
   public rejectReason = this.fb.control('');
   public isRejected = false;
-  public _reload = true;
 
   constructor(private route: ActivatedRoute, public sharedService: SharedService, private institutionRepresentativeService: InstitutionRepresentativeService, private fb: FormBuilder) {
     super();
