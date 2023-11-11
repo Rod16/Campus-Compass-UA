@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Data} from "@angular/router";
 import {IUserInfo} from "../../../shared/interfaces/user-info";
 import {SharedService} from "../../../shared/services/shared.service";
@@ -21,8 +21,9 @@ export class ViewCertificateComponent extends BaseComponent implements OnInit {
   public searchTerm = this.fb.control('');
   public rejectReason = this.fb.control('');
   public isRejected = false;
+  public _reload = true;
 
-  constructor(private route: ActivatedRoute, public sharedService: SharedService, private institutionRepresentativeService: InstitutionRepresentativeService, private fb: FormBuilder) {
+  constructor(private route: ActivatedRoute, public sharedService: SharedService, private institutionRepresentativeService: InstitutionRepresentativeService, private fb: FormBuilder, private cdr: ChangeDetectorRef) {
     super();
   }
 
@@ -52,6 +53,7 @@ export class ViewCertificateComponent extends BaseComponent implements OnInit {
 
   public approveCertificate(certificate: ICertificate) {
     this.institutionRepresentativeService.approveCertificate(certificate);
+    this.ngOnInit();
     this.toggleModal(certificate);
   }
 
@@ -62,6 +64,7 @@ export class ViewCertificateComponent extends BaseComponent implements OnInit {
   public confirmRejection(certificate: ICertificate) {
     if (this.rejectReason.value && this.rejectReason.value?.length > 0) {
       this.institutionRepresentativeService.rejectCertificate(certificate, this.rejectReason.value as string);
+      this.ngOnInit();
       this.toggleModal(this.chosenCertificate);
     }
   }

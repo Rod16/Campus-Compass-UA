@@ -1,11 +1,21 @@
 <ion-content [fullscreen]="true">
-  <ion-searchbar [formControl]="searchTerm"></ion-searchbar>
+  <p class="d-flex justify-content-center align-items-center f25-1 mb-4 mt-101px">
+    <ion-icon name="folder-outline" color="primary" class="icon-40px me-1"></ion-icon>
+    <span>Перегляд документів</span>
+  </p>
+  <ion-searchbar [formControl]="searchTerm" class="w-50 mx-auto"></ion-searchbar>
   <ion-list lines="none" [inset]="true" class="d-flex">
     <ion-item *ngFor="let certificate of certificatesArray" (click)="toggleModal(certificate)" class="p-0">
-      <ion-card class="cursor-pointer">
-        <div [innerHTML]="certificate.template" style="scale: 0.7"></div>
+      <ion-card class="cursor-pointer certificate-card">
+        <div [innerHTML]="certificate.template" style="scale: 0.7; max-height: 300px"></div>
         <ion-card-header>
-          <ion-card-title>{{certificate.name}}</ion-card-title>
+          <ion-card-title>
+            <div class="d-flex justify-content-between align-items-center">
+              <span>{{certificate.name}}</span>
+              <ion-chip *ngIf="certificate.isApproved" color="success" class="m-0">Прийнято</ion-chip>
+              <ion-chip *ngIf="certificate.isApproved === false" color="danger" class="m-0">Відхилено</ion-chip>
+            </div>
+          </ion-card-title>
           <ion-card-subtitle>{{certificate.date}}</ion-card-subtitle>
         </ion-card-header>
       </ion-card>
@@ -17,15 +27,21 @@
         <ion-toolbar>
           <ion-title>{{chosenCertificate.name}}</ion-title>
           <ion-buttons slot="end">
-            <ion-button (click)="toggleModal(chosenCertificate)">Close</ion-button>
+            <ion-button (click)="toggleModal(chosenCertificate)"><ion-icon name="close-outline"></ion-icon></ion-button>
           </ion-buttons>
         </ion-toolbar>
       </ion-header>
       <ion-content class="ion-padding">
         <div [innerHTML]="chosenCertificate.template"></div>
+        <div class="d-flex justify-content-center gap-3 my-2">
           <ion-button (click)="approveCertificate(chosenCertificate)" color="success">Прийняти довідку</ion-button>
           <ion-button (click)="rejectCertificate()" color="danger">Відхилити довідку</ion-button>
-        <ion-textarea *ngIf="isRejected" placeholder="Введіть коментар/причину відхилення" [formControl]="rejectReason"></ion-textarea>
+        </div>
+        <p *ngIf="chosenCertificate.isApproved === false">
+          <span class="l1 text-danger">Причина відхилення: </span>
+          <span class="l2">{{chosenCertificate.rejectReason}}</span>
+        </p>
+        <ion-input *ngIf="isRejected" placeholder="Введіть коментар/причину відхилення" [formControl]="rejectReason" class="text-input mb-2"></ion-input>
         <ion-button *ngIf="isRejected" (click)="confirmRejection(chosenCertificate)">Підтвердити</ion-button>
       </ion-content>
     </ng-template>

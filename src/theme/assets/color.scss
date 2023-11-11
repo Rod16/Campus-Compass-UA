@@ -16,6 +16,12 @@
 .text-dark-grey {
   color: #50555C !important;
 }
+.text-success {
+  color: #5C9B4C !important;
+}
+.text-danger {
+  color: var(--ion-color-danger) !important;
+}
 .border-medium {
   border: 1px solid var(--ion-color-medium) !important;
   box-shadow: none;

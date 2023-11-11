@@ -1,40 +1,68 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { InstitutionRepresentativeMainComponent } from './institution-representative-main.component';
 import {UserBasicDataResolver} from "../../shared/resolvers/user-basic-data.resolver";
 import {ViewCertificateComponent} from "./view-certificate/view-certificate.component";
-import {InstitutionRepresentativeInfoComponent} from "./university-authority-info/institution-representative-info.component";
 import {UserInfoComponent} from "../../shared/components/user-info/user-info.component";
+import {INavigationData} from "../../shared/interfaces/navigation-data";
+import {NavigationWrapperComponent} from "../../shared/components/navigation-wrapper/navigation-wrapper.component";
+import {HomeComponent} from "../../shared/components/home/home.component";
+import {ParentDataResolver} from "../../shared/resolvers/parent-data.resolver";
+
+const NAVIGATION_DATA: INavigationData[] = [
+  {
+    title: 'Головна',
+    icon: 'home-outline',
+    link: 'home'
+  },
+  {
+    title: 'Перегляд документів',
+    icon: 'folder-outline',
+    link: 'view-certificate'
+  },
+  {
+    title: 'Інформація про користувача',
+    icon: 'person-circle-outline',
+    link: 'account'
+  }
+]
 
 const routes: Routes = [
   {
-    path: '',
-    component: InstitutionRepresentativeMainComponent,
+    path: ':id',
+    component: NavigationWrapperComponent,
     resolve: {
       userInfo: UserBasicDataResolver
     },
+    data: {
+      navigation: NAVIGATION_DATA
+    },
     children: [
       {
-        path: ':id/view-certificate',
-        component: ViewCertificateComponent,
+        path: '',
+        redirectTo: 'home',
+        pathMatch: "full"
+      },
+      {
+        path: 'home',
+        component: HomeComponent,
         resolve: {
-          userInfo: UserBasicDataResolver
+          userInfo: ParentDataResolver
+        },
+        data: {
+          navigation: NAVIGATION_DATA
         },
       },
       {
-        path: ':id/account',
+        path: 'account',
         component: UserInfoComponent,
         resolve: {
-          userInfo: UserBasicDataResolver
+          userInfo: ParentDataResolver
         },
       },
       {
-        path: ':id',
-        component: InstitutionRepresentativeInfoComponent,
-        resolve: {
-          userInfo: UserBasicDataResolver
-        },
-      },
+        path: 'view-certificate',
+        component: ViewCertificateComponent,
+      }
     ]
   }
 ];

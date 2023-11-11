@@ -14,7 +14,7 @@
     <div *ngIf="sharedService.getScreenWidth().valueOf() >= 800" class="d-flex">
       <ion-list class="sidebar-nav">
         <div>
-          <p *ngFor="let navigationItem of navigationData" routerLink="{{navigationItem.link}}" class="d-flex align-items-center l1 mx-5 mb-2" style="height: 40px; cursor: pointer;">
+          <p *ngFor="let navigationItem of navigationData" routerLink="{{navigationItem.link}}" class="d-flex align-items-center l1 mx-5 mb-2 cursor-pointer" style="height: 40px;">
             <ion-icon name="{{navigationItem.icon}}" class="icon-40px position-absolute"></ion-icon>
             <span style="margin-left: 50px">{{navigationItem.title}}</span>
           </p>
@@ -47,7 +47,7 @@
     <ion-content class="ion-padding l2">
       <p [routerLink]="['account']"><ion-label>Кабінет користувача</ion-label></p>
       <hr class="bg-primary" />
-      <p (click)="signOut()"><ion-label color="secondary">Вийти</ion-label></p>
+      <p (click)="signOut()" class="cursor-pointer"><ion-label color="secondary">Вийти</ion-label></p>
     </ion-content>
   </ng-template>
 </ion-popover>
