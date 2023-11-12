@@ -41,7 +41,7 @@
       </div>
       <ion-title class="p-0 fw-700 mx-auto text-center my-2">Додати нові поля:</ion-title>
       <div *ngFor="let control of subjectsFormControlArray">
-        <ion-input [formControl]="control" class="text-input" />
+        <ion-input [formControl]="control" class="text-input mb-1" />
       </div>
       <div class="d-flex gap-3 justify-content-between mt-2">
         <ion-button (click)="addNewField()" class="l2 text-default">Додати поле</ion-button>
