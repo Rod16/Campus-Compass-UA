@@ -5,10 +5,12 @@ import {BaseComponent} from "../../../shared/components/base.component";
 import {ISubjectData} from "../../../shared/interfaces/grade-data";
 import {FormControl, UntypedFormBuilder} from "@angular/forms";
 import {TeacherService} from "../services/teacher.service";
+import {SharedService} from "../../../shared/services/shared.service";
 
 @Component({
   selector: 'app-student',
   templateUrl: './view-subjects.component.html',
+  styleUrls: ['./view-subjects.component.scss']
 })
 export class ViewSubjectsComponent extends BaseComponent implements OnInit {
   public userInfo!: IUserInfo;
@@ -18,7 +20,7 @@ export class ViewSubjectsComponent extends BaseComponent implements OnInit {
   public subjectIndex!: number;
   public isModalOpen = false;
 
-  constructor(private route: ActivatedRoute, private fb: UntypedFormBuilder, private teacherService: TeacherService) {
+  constructor(private route: ActivatedRoute, private fb: UntypedFormBuilder, private teacherService: TeacherService, public sharedService: SharedService) {
     super();
   }
 
@@ -46,7 +48,7 @@ export class ViewSubjectsComponent extends BaseComponent implements OnInit {
         title: control.value,
         teacher: this.chosenSubject.teacher.name,
       }
-    });
+    }).filter((field) => field.title !== '');
     for (let i = 0; i < this.chosenSubject.gradesArray.length; i++) {
       this.chosenSubject.gradesArray[i].grades.push(...addedFields);
     }

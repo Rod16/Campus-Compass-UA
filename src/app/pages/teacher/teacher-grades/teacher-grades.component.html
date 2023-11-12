@@ -1,17 +1,38 @@
 <ion-content [fullscreen]="true" *ngIf="studentData">
-  <div *ngFor="let subject of studentData">
-    <ion-card>
-      <ion-card-header>
-        <ion-card-title>{{subject.subject}}</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        <div *ngIf="subject.students">
-          <p>Студенти:</p>
-          <div *ngFor="let student of subject.students">
-            <p [routerLink]="subject.subject + '/student/' + student.uid">{{student.name}}</p>
+  <p class="d-flex justify-content-center align-items-center f25-1 mb-4 mx-1" [ngClass]="sharedService.getScreenWidth().valueOf() >= 800 ? 'mt-101px' : 'mt-5'">
+    <ion-icon name="pencil-outline" color="primary" class="icon-40px me-1"></ion-icon>
+    <span>Виставлення оцінок</span>
+  </p>
+  <div [ngClass]="sharedService.getScreenWidth().valueOf() >= 800 ? 'd-flex gap-3 flex-wrap justify-content-center' : 'mx-auto'">
+    <div *ngFor="let subject of studentData; let i = index" class="mx-3">
+      <ion-card class="border-medium students-card">
+        <ion-card-header>
+          <ion-card-title class="text-center l1 p-0" color="primary my-1">{{subject.subject}}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <div *ngIf="subject.students">
+            <p class="text-black l1">Студенти:</p>
+            <div class="border-medium p-2 overflow-auto">
+              <ion-item lines="none" class="item-native-paddingless">
+                <ionic-selectable
+                  [(ngModel)]="chosenStudent"
+                  [items]="subject.students"
+                  [isMultiple]="false"
+                  itemTextField="name"
+                  [canSearch]="true"
+                  placeholder="Пошук студента"
+                  (onChange)="navigateToSetGrade(subject.subject)"
+                  class="border-medium px-1 mb-1"
+                >
+                </ionic-selectable>
+              </ion-item>
+              <div *ngFor="let student of subject.students">
+                <p class="text-black l2 cursor-pointer" [routerLink]="subject.subject + '/student/' + student.uid">{{student.name}} - {{student.group}}</p>
+              </div>
+            </div>
           </div>
-        </div>
-      </ion-card-content>
-    </ion-card>
+        </ion-card-content>
+      </ion-card>
+    </div>
   </div>
 </ion-content>

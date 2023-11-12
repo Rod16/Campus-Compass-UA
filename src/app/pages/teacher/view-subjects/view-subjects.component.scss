@@ -1,0 +1,8 @@
+.subject-card {
+  width: calc(50% - 12px);
+  height: 400px;
+
+  &-mobile {
+    width: 100%;
+  }
+}

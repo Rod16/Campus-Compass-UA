@@ -5,6 +5,7 @@ import {BaseComponent} from "../../../shared/components/base.component";
 import {FormBuilder, FormControl} from "@angular/forms";
 import {TeacherService} from "../services/teacher.service";
 import {IStudentGrade, ISubjectData} from "../../../shared/interfaces/grade-data";
+import {SharedService} from "../../../shared/services/shared.service";
 
 @Component({
   selector: 'app-teacher-info',
@@ -19,7 +20,7 @@ export class SetGradeComponent extends BaseComponent implements OnInit {
   public studentData!: IStudentGrade;
   public studentDataIndex!: number;
 
-  constructor(private route: ActivatedRoute, private fb: FormBuilder, private teacherService: TeacherService) {
+  constructor(private route: ActivatedRoute, private fb: FormBuilder, private teacherService: TeacherService, public sharedService: SharedService) {
     super();
   }
 

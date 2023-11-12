@@ -10,6 +10,9 @@
 .bg-pink {
   --ion-background-color: #EFE7FB !important;
 }
+.bg-input-grey {
+  --background: var(--ion-color-step-100) !important;
+}
 .text-black {
   color: #000 !important;
 }

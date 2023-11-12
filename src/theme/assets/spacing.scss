@@ -133,8 +133,15 @@
 .p-0 {
   padding: 0;
 }
+.p-2 {
+  padding: 2 * $space;
+}
 .pb-0 {
   padding-bottom: 0;
+}
+.px-1 {
+  padding-left: 1 * $space;
+  padding-right: 1 * $space;
 }
 .px-6 {
   padding-left: 48px;
@@ -172,4 +179,8 @@
 }
 .gap-6 {
   gap: 48px;
+}
+
+ion-item.item-native-paddingless {
+  --padding-start: 0;
 }

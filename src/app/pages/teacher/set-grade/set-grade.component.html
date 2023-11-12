@@ -1,18 +1,24 @@
 <ion-content [fullscreen]="true">
-  <div *ngIf="studentData">
-    <ion-card>
-      <ion-card-header>
-        <ion-card-title>{{subjectData.subject}}</ion-card-title>
+  <p class="d-flex justify-content-center align-items-center f25-1 mb-4 mx-1" [ngClass]="sharedService.getScreenWidth().valueOf() >= 800 ? 'mt-101px' : 'mt-5'">
+    <ion-icon name="pencil-outline" color="primary" class="icon-40px me-1"></ion-icon>
+    <span>Виставлення оцінок</span>
+  </p>
+  <div *ngIf="studentData" class="mx-3">
+    <ion-card class="border-medium">
+      <ion-card-header class="pb-0 mb-2">
+        <ion-card-title class="l1 ms-1" color="primary">{{subjectData.subject}}</ion-card-title>
       </ion-card-header>
-      <ion-card-content>
-        <ion-list>
-          <ion-item *ngFor="let grade of studentData.grades; let i = index">
-            <ion-label>{{grade.title}}</ion-label>
-            <input [formControl]="formControlsArray[i]" />
+      <ion-card-content class="p-0">
+        <ion-list class="p-0">
+          <ion-item *ngFor="let grade of studentData.grades; let i = index" lines="none" class="bg-pink mb-1 px-1">
+            <div class="w-100 d-flex justify-content-between align-items-center mx-1">
+              <ion-label class="my-0 l1">{{grade.title}}</ion-label>
+              <ion-input class="my-1 l1 grade-input" style="width: 60px" label="" [formControl]="formControlsArray[i]" />
+            </div>
           </ion-item>
         </ion-list>
       </ion-card-content>
     </ion-card>
-    <ion-button (click)="saveForm()" color="primary" shape="round" class="centered-button">Save</ion-button>
+    <ion-button (click)="saveForm()" color="primary" class="ms-1 mt-3 text-default l2">Зберегти</ion-button>
   </div>
 </ion-content>
