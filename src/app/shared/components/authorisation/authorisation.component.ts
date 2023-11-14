@@ -6,7 +6,6 @@ import {BaseComponent} from "../base.component";
 import {IUserInfo} from "../../interfaces/user-info";
 import {SharedService} from "../../services/shared.service";
 import {UserRole} from "../../enums/user-role";
-import {ToastTypeEnum} from "../../enums/toast-type";
 
 @Component({
   selector: 'app-authorisation',

@@ -3,7 +3,7 @@ import {ActivatedRoute, Data} from "@angular/router";
 import {IUserInfo} from "../../interfaces/user-info";
 import {BaseComponent} from "../base.component";
 import {SharedService} from "../../services/shared.service";
-import {IonPopover, MenuController} from "@ionic/angular";
+import {IonPopover} from "@ionic/angular";
 import {INavigationData} from "../../interfaces/navigation-data";
 
 @Component({
@@ -17,7 +17,7 @@ export class NavigationWrapperComponent extends BaseComponent implements OnInit 
   public isPopoverOpen = false;
   public navigationData!: INavigationData[];
 
-  constructor(private route: ActivatedRoute, public sharedService: SharedService, private menu: MenuController) {
+  constructor(private route: ActivatedRoute, public sharedService: SharedService) {
     super();
   }
 

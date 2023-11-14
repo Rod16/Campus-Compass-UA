@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
 import {AngularFirestore} from "@angular/fire/compat/firestore";
 import {IUserInfo} from "../../../shared/interfaces/user-info";
-import {map, Observable, switchMap} from "rxjs";
+import {map, Observable} from "rxjs";
 import {SharedService} from "../../../shared/services/shared.service";
 import {PageAction} from "../enums/page-action";
 import {UserRole} from "../../../shared/enums/user-role";

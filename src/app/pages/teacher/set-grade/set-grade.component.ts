@@ -5,7 +5,6 @@ import {FormBuilder, FormControl} from "@angular/forms";
 import {TeacherService} from "../services/teacher.service";
 import {IStudentGrade, ISubjectData} from "../../../shared/interfaces/grade-data";
 import {SharedService} from "../../../shared/services/shared.service";
-import {ToastTypeEnum} from "../../../shared/enums/toast-type";
 
 @Component({
   selector: 'app-teacher-info',
