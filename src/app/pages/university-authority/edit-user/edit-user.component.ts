@@ -7,6 +7,7 @@ import {BaseComponent} from "../../../shared/components/base.component";
 import {UntypedFormBuilder, Validators} from "@angular/forms";
 import {Role} from "../enums/role"
 import {PageAction} from "../enums/page-action";
+import {UserRole} from "../../../shared/enums/user-role";
 
 @Component({
   selector: 'app-edit-user',
@@ -89,4 +90,5 @@ export class EditUserComponent extends BaseComponent implements OnInit {
   }
 
   protected readonly Role = Role;
+  protected readonly UserRole = UserRole;
 }

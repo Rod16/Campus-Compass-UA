@@ -1,20 +1,23 @@
 <ion-content [fullscreen]="true">
+  <p class="d-flex justify-content-center align-items-center f25-1 mb-5 mt-101px mx-1">
+    <ion-icon name="id-card-outline" color="primary" class="icon-40px me-1"></ion-icon>
+    <span>Створення довідок</span>
+  </p>
   <form [formGroup]="certificateForm">
-    <p>Створити довідку:</p>
-    <ion-segment value="student" (ionChange)="segmentChanged($event)">
-      <ion-segment-button value="student">
-        <ion-label>Для студента</ion-label>
-      </ion-segment-button>
-      <ion-segment-button value="teacher">
-        <ion-label>Для викладача</ion-label>
-      </ion-segment-button>
-    </ion-segment>
+    <div class="d-flex justify-content-center gap-5">
+      <ion-button (click)="segmentChanged(Role.Student)" color="primary" [fill]="selectedRole === Role.Student ? 'solid' : 'outline'" class="h-72px text-default role-button">
+        <ion-icon name="person-outline" class="icon-40px me-3"></ion-icon>
+        <ion-label class="l1">Для студента</ion-label>
+      </ion-button>
+      <ion-button (click)="segmentChanged(Role.Teacher)" color="primary" [fill]="selectedRole === Role.Teacher ? 'solid' : 'outline'" class="h-72px text-default role-button">
+        <ion-icon name="school-outline" class="icon-40px me-3"></ion-icon>
+        <ion-label class="l1">Для викладача</ion-label>
+      </ion-button>
+    </div>
     <div *ngIf="selectedRole === Role.Student">
-      <ion-title>Обрати студента</ion-title>
       <app-certificate [selectedRole]="Role.Student" [userArray]="studentArray"></app-certificate>
     </div>
     <div *ngIf="selectedRole === Role.Teacher">
-      <ion-title>Обрати викладача</ion-title>
       <app-certificate [selectedRole]="Role.Teacher" [userArray]="teacherArray"></app-certificate>
     </div>
   </form>

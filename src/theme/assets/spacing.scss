@@ -42,6 +42,9 @@
   margin-bottom: 104px;
 }
 
+.ms-0 {
+  margin-left: 0;
+}
 .ms-1 {
   margin-left: 1 * $space;
 }
@@ -174,8 +177,14 @@
 .h-100vh {
   height: 100vh;
 }
+.gap-1 {
+  gap: 8px;
+}
 .gap-3 {
   gap: 24px;
+}
+.gap-5 {
+  gap: 40px;
 }
 .gap-6 {
   gap: 48px;

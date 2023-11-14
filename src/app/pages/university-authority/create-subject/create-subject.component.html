@@ -1,43 +1,59 @@
 <ion-content [fullscreen]="true">
-  <form [formGroup]="subjectForm">
+  <p class="d-flex justify-content-center align-items-center f25-1 mb-5 mt-101px mx-1">
+    <ion-icon name="library-outline" color="primary" class="icon-40px me-1"></ion-icon>
+    <span>Створення навчальної дисципліни</span>
+  </p>
+  <form [formGroup]="subjectForm" class="mx-3">
     <ion-card>
-      <ion-card-header>
-        <ion-card-title>Створення навчальної дисципліни</ion-card-title>
-      </ion-card-header>
       <ion-card-content>
-        <ion-item>
-          <ion-input formControlName="subject" type="text" label="Назва навчальної дисципліни"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-input formControlName="course" type="number" label="Курс"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label>Вибір викладача</ion-label>
-          <ionic-selectable
-            formControlName="teacher"
-            [items]="teachersArray"
-            [isMultiple]="false"
-            itemTextField="name"
-            [canSearch]="true"
-          >
-          </ionic-selectable>
-        </ion-item>
-        <ion-item>
-          <ion-input formControlName="groups" type="text" label="Вибір навчальної групи"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label>Вибір індивідуальних студентів</ion-label>
-          <ionic-selectable
-            formControlName="students"
-            [items]="studentsArray"
-            itemTextField="name"
-            [canSearch]="true"
-            [isMultiple]="true"
-          >
-          </ionic-selectable>
-        </ion-item>
-        <ion-button [disabled]="isLoading" (click)="saveSubject()">Зберегти</ion-button>
+        <div class="mb-1">
+          <ion-label class="l1 text-dark-grey">Назва навчальної дисципліни</ion-label>
+          <ion-input formControlName="subject" type="text" class="text-input" label="" placeholder="Вища математика"></ion-input>
+        </div>
+        <div class="mb-1">
+          <ion-label class="l1 text-dark-grey">Курс</ion-label>
+          <ion-input formControlName="course" type="number" class="text-input" label="" placeholder="1"></ion-input>
+        </div>
+        <div class="mb-1">
+          <p class="l1 text-dark-grey">Вибір викладача</p>
+          <div class="w-50">
+            <ion-item lines="none" class="ion-no-padding">
+              <ionic-selectable
+                formControlName="teacher"
+                [items]="teachersArray"
+                [isMultiple]="false"
+                itemTextField="name"
+                [canSearch]="true"
+                class="border-medium px-1"
+                placeholder="Виберіть викладача"
+              >
+              </ionic-selectable>
+            </ion-item>
+          </div>
+        </div>
+        <div class="mb-1">
+          <ion-label class="l1 text-dark-grey">Вибір навчальної групи</ion-label>
+          <ion-input formControlName="groups" type="text" class="text-input" label="" placeholder="ІО-81, ІО-82"></ion-input>
+        </div>
+        <div class="mb-1">
+          <p class="l1 text-dark-grey">Вибір індивідуальних студентів</p>
+          <div class="w-50">
+            <ion-item lines="none" class="ion-no-padding">
+              <ionic-selectable
+                formControlName="students"
+                [items]="studentsArray"
+                [isMultiple]="true"
+                itemTextField="name"
+                [canSearch]="true"
+                class="border-medium px-1"
+                placeholder="Виберіть студентів"
+              >
+              </ionic-selectable>
+            </ion-item>
+          </div>
+        </div>
       </ion-card-content>
     </ion-card>
+    <ion-button [disabled]="isLoading" (click)="saveSubject()" class="ms-1 text-default l2 mt-3">Зберегти</ion-button>
   </form>
 </ion-content>

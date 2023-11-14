@@ -1,11 +1,25 @@
 <ion-content [fullscreen]="true">
-  <ion-title>Студенти та викладачі</ion-title>
-  <ion-searchbar [formControl]="searchTerm"></ion-searchbar>
-  <ion-list lines="none" [inset]="true">
-    <ion-item *ngFor="let user of usersArray" class="p-0" [routerLink]="'../edit-user/' + user.uid">
-      <ion-card class="cursor-pointer">
-        {{user.name}} - {{user.role === UserRole.Student ? 'Студент' : 'Викладач'}}
-      </ion-card>
-    </ion-item>
-  </ion-list>
+  <p class="d-flex justify-content-center align-items-center f25-1 mb-5 mt-101px mx-1">
+    <ion-icon name="people-outline" color="primary" class="icon-40px me-1"></ion-icon>
+    <span>Перегляд користувачів</span>
+  </p>
+  <div class="mx-3">
+    <div class="d-flex ion-justify-content-end mb-5">
+      <ion-button [routerLink]="['../create-user']" class="text-default l2" color="primary">
+        <ion-icon name="add-outline" slot="start"></ion-icon>
+        <ion-label>Додати користувача</ion-label>
+      </ion-button>
+    </div>
+    <ion-searchbar [formControl]="searchTerm" class="w-50 mx-auto mb-3"></ion-searchbar>
+    <ion-grid [fixed]="true">
+      <ion-row>
+        <ion-col class="l1">ПІБ</ion-col>
+        <ion-col class="l1">Роль в системі</ion-col>
+      </ion-row>
+      <ion-row *ngFor="let user of usersArray" [routerLink]="'../edit-user/' + user.uid" class="cursor-pointer">
+        <ion-col>{{user.name}}</ion-col>
+        <ion-col>{{user.role === UserRole.Student ? 'Студент' : 'Викладач'}}</ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
 </ion-content>

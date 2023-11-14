@@ -4,6 +4,7 @@ import {IUserInfo} from "../../../shared/interfaces/user-info";
 import {ISubjectData} from "../../../shared/interfaces/grade-data";
 import {map, Observable, switchMap} from "rxjs";
 import {SharedService} from "../../../shared/services/shared.service";
+import {ToastTypeEnum} from "../../../shared/enums/toast-type";
 
 @Injectable({providedIn: 'root'})
 export class TeacherService {
@@ -32,7 +33,9 @@ export class TeacherService {
   }
 
   updateSubjectsData(subjectData: ISubjectData) {
-    this.fireStore.collection('teacher-student-connections').doc(`${subjectData.teacher.university}-${subjectData.teacher.uid}-${subjectData.subject}-${subjectData.course}`).update(subjectData);
+    this.fireStore.collection('teacher-student-connections').doc(`${subjectData.teacher.university}-${subjectData.teacher.uid}-${subjectData.subject}-${subjectData.course}`).update(subjectData).then(() => {
+      this.sharedService.presentToast('Предмет успішно оновлено', ToastTypeEnum.Success);
+    });
   }
 
 }

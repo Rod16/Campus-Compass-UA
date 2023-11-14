@@ -5,7 +5,7 @@
   </p>
   <div [ngClass]="sharedService.getScreenWidth().valueOf() >= 800 ? 'd-flex gap-3 flex-wrap justify-content-center' : 'mx-auto'">
     <div *ngFor="let subject of studentData; let i = index" class="mx-3">
-      <ion-card class="border-medium students-card">
+      <ion-card class="border-medium students-card" [ngClass]="{'mb-2': sharedService.getScreenWidth().valueOf() < 800}">
         <ion-card-header>
           <ion-card-title class="text-center l1 p-0" color="primary my-1">{{subject.subject}}</ion-card-title>
         </ion-card-header>
@@ -13,7 +13,7 @@
           <div *ngIf="subject.students">
             <p class="text-black l1">Студенти:</p>
             <div class="border-medium p-2 overflow-auto">
-              <ion-item lines="none" class="item-native-paddingless">
+              <ion-item lines="none" class="item-native-paddingless ion-no-padding">
                 <ionic-selectable
                   [(ngModel)]="chosenStudent"
                   [items]="subject.students"

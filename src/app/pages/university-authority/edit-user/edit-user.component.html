@@ -1,38 +1,48 @@
 <ion-content [fullscreen]="true">
-  <form [formGroup]="userForm">
+  <p class="d-flex justify-content-center align-items-center f25-1 mb-5 mt-101px mx-1">
+    <ion-icon name="person-add-outline" color="primary" class="icon-40px me-1"></ion-icon>
+    <span>Створення нового користувача</span>
+  </p>
+  <form [formGroup]="userForm" class="mx-3">
     <ion-card>
-      <ion-card-header>
-        <ion-card-title>{{action === PageAction.Create ? 'Створити нового користувача' : 'Редагувати користувача'}}</ion-card-title>
-      </ion-card-header>
       <ion-card-content>
-        <ion-item>
-          <ion-input formControlName="name" type="text" label="ПІБ"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-input formControlName="email" type="email" label="Email"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label position="floating">Дата народження</ion-label>
+        <div class="mb-1">
+          <ion-label class="l1 text-dark-grey">ПІБ</ion-label>
+          <ion-input formControlName="name" type="text" class="text-input" label="" placeholder="Залужний Валерій Федорович"></ion-input>
+        </div>
+        <div class="mb-1">
+          <ion-label class="l1 text-dark-grey">Email</ion-label>
+          <ion-input formControlName="email" type="email" class="text-input" label="" placeholder="example@example.com"></ion-input>
+        </div>
+        <div class="mb-1" *ngIf="userForm.get('role')?.value !== UserRole.InstitutionRepresentative && userForm.get('role')?.value !== UserRole.UniversityAuthority">
+          <ion-label class="l1 text-dark-grey">Дата народження</ion-label>
           <ion-datetime (ionChange)="formatDatePickerValue()" formControlName="birthDate" presentation="date" [preferWheel]="true"></ion-datetime>
-        </ion-item>
-        <ion-item *ngIf="!userInfo.faculty">
-          <ion-input formControlName="faculty" type="text" label="Факультет (абревіатура)"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label>Роль</ion-label>
-          <ion-radio-group formControlName="role" (ionChange)="roleChange($any($event))">
-            <ion-radio [value]="Role.Student" labelPlacement="end">Студент</ion-radio>
-            <ion-radio [value]="Role.Teacher" labelPlacement="end">Викладач</ion-radio>
-          </ion-radio-group>
-        </ion-item>
-        <ion-item *ngIf="userForm.get('role')?.value === Role.Student">
-          <ion-input formControlName="course" type="number" label="Курс"></ion-input>
-        </ion-item>
-        <ion-item *ngIf="userForm.get('role')?.value === Role.Student">
-          <ion-input formControlName="group" type="text" label="Група"></ion-input>
-        </ion-item>
-        <ion-button (click)="saveUser()" [disabled]="userForm.invalid">{{action === PageAction.Create ? 'Створити' : 'Зберегти'}}</ion-button>
+        </div>
+        <div *ngIf="!userInfo.faculty" class="mb-1">
+          <ion-label class="l1 text-dark-grey">Факультет (абревіатура)</ion-label>
+          <ion-input formControlName="faculty" type="text" class="text-input" label="" placeholder="ФІОТ"></ion-input>
+        </div>
+        <div class="mb-1">
+          <ion-label class="l1 text-dark-grey">Роль в системі</ion-label>
+          <div>
+            <ion-radio-group formControlName="role" (ionChange)="roleChange($any($event))" class="d-flex flex-column gap-1" style="width: 200px">
+              <ion-radio [value]="Role.Student" labelPlacement="end" class="l2" justify="start">Студент</ion-radio>
+              <ion-radio [value]="Role.Teacher" labelPlacement="end" class="l2" justify="start">Викладач</ion-radio>
+            </ion-radio-group>
+          </div>
+        </div>
+        <div *ngIf="userForm.get('role')?.value === Role.Student">
+          <div class="mb-1">
+            <ion-label class="l1 text-dark-grey">Курс</ion-label>
+            <ion-input formControlName="course" type="number" class="text-input" label="" placeholder="2"></ion-input>
+          </div>
+          <div class="mb-1">
+            <ion-label class="l1 text-dark-grey">Група</ion-label>
+            <ion-input formControlName="group" type="text" class="text-input" label="" placeholder="ІО-81"></ion-input>
+          </div>
+        </div>
       </ion-card-content>
     </ion-card>
+    <ion-button (click)="saveUser()" [disabled]="userForm.invalid" class="text-default l2 ms-1 my-3">{{action === PageAction.Create ? 'Створити' : 'Зберегти'}}</ion-button>
   </form>
 </ion-content>

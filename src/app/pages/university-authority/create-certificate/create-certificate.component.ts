@@ -37,8 +37,8 @@ export class CreateCertificateComponent extends BaseComponent implements OnInit 
     });
   }
 
-  public segmentChanged(e: any) {
-    this.selectedRole = e.detail.value;
+  public segmentChanged(role: Role) {
+    this.selectedRole = role;
     if (this.selectedRole === Role.Teacher && this.teacherArray.length === 0) {
       super.unsubscribeOnComponentDestroy(this.universityAuthorityService.getTeachers(this.userInfo.university as string)).subscribe((teachers: IUserInfo[]) => {
         this.teacherArray = teachers;

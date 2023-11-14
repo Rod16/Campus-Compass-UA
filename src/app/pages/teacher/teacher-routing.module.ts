@@ -66,7 +66,6 @@ const routes: Routes = [
         path: 'grades/:subject/student/:studentId',
         component: SetGradeComponent,
         resolve: {
-          userInfo: ParentDataResolver,
           studentGrade: StudentGradeResolver
         },
       },

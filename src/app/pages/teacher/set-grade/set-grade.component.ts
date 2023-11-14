@@ -1,11 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Data} from "@angular/router";
-import {IUserInfo} from "../../../shared/interfaces/user-info";
 import {BaseComponent} from "../../../shared/components/base.component";
 import {FormBuilder, FormControl} from "@angular/forms";
 import {TeacherService} from "../services/teacher.service";
 import {IStudentGrade, ISubjectData} from "../../../shared/interfaces/grade-data";
 import {SharedService} from "../../../shared/services/shared.service";
+import {ToastTypeEnum} from "../../../shared/enums/toast-type";
 
 @Component({
   selector: 'app-teacher-info',
@@ -13,7 +13,6 @@ import {SharedService} from "../../../shared/services/shared.service";
   styleUrls: ['./set-grade.component.scss'],
 })
 export class SetGradeComponent extends BaseComponent implements OnInit {
-  public userInfo!: IUserInfo;
   public subjectData!: ISubjectData;
   public formControlsArray: FormControl[] = [];
   public studentId!: string;
@@ -26,7 +25,6 @@ export class SetGradeComponent extends BaseComponent implements OnInit {
 
   ngOnInit() {
     super.unsubscribeOnComponentDestroy(this.route.data).subscribe((details: Data) => {
-      this.userInfo = details['userInfo'];
       this.subjectData = details['studentGrade'];
       this.studentId = this.route.snapshot.params['studentId'];
       for (let i = 0; i < this.subjectData.gradesArray.length; i++) {
@@ -48,7 +46,7 @@ export class SetGradeComponent extends BaseComponent implements OnInit {
     })
     this.subjectData.gradesArray[this.studentDataIndex] = this.studentData;
     this.teacherService.updateGrades(this.subjectData).then(() => {
-      alert('Оцінки успішно збережено');
+      this.sharedService.presentToast('Оцінки успішно оновлено', ToastTypeEnum.Success);
     })
   }
 
