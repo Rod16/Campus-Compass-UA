@@ -6,6 +6,7 @@ import {UniversityAuthorityService} from "../services/university-authority.servi
 import {BaseComponent} from "../../../shared/components/base.component";
 import {UntypedFormBuilder, Validators} from "@angular/forms";
 import {switchMap} from "rxjs";
+import {ToastTypeEnum} from "../../../shared/enums/toast-type";
 
 @Component({
   selector: 'app-edit-user',
@@ -47,7 +48,7 @@ export class CreateSubjectComponent extends BaseComponent implements OnInit {
     if (this.subjectForm.get('students')?.value || this.subjectForm.get('groups')?.value) {
       this.universityAuthorityService.addSubject(this.subjectForm.value.subject, this.subjectForm.value.teacher, this.subjectForm.value.course, this.subjectForm.value.students, this.subjectForm.value.groups);
     } else {
-      //this.sharedService.presentToast('Оберіть студентів або групи');
+      this.sharedService.presentToast('Оберіть студентів або групи', ToastTypeEnum.Error);
     }
   }
 }

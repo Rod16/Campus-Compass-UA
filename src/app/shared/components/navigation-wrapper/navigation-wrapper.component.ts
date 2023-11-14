@@ -37,8 +37,4 @@ export class NavigationWrapperComponent extends BaseComponent implements OnInit 
     this.isPopoverOpen = true;
   }
 
-  public closeMenu() {
-    this.menu.close()
-  }
-
 }

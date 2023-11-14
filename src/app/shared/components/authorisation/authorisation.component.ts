@@ -27,9 +27,6 @@ export class AuthorisationComponent extends BaseComponent {
     super.unsubscribeOnComponentDestroy(this.authorisationService.login(this.authForm.get('email')?.value as string, this.authForm.get('password')?.value as string)).subscribe((user) => {
       if (user) {
         this.navigateByRole(user);
-        this.sharedService.presentToast('Вас успішно авторизовано', ToastTypeEnum.Success);
-      } else {
-        this.sharedService.presentToast('Неправильний логін та/або пароль', ToastTypeEnum.Success);
       }
     });
   }

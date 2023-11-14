@@ -17,6 +17,8 @@ export class AuthorisationService {
     return query.get().pipe(switchMap(snapshot => {
       if (snapshot.docs.length === 0) {
         this.sharedService.presentToast('Неправильний логін та/або пароль', ToastTypeEnum.Error);
+      } else {
+        this.sharedService.presentToast('Вас успішно авторизовано', ToastTypeEnum.Success);
       }
       return snapshot.docs.length > 0 && this.sharedService.decryptData(snapshot.docs[0].data().password) === password ? snapshot.docs.map(student => student.data()) : []
     }));

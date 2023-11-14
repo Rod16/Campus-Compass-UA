@@ -7,6 +7,7 @@ import {PageAction} from "../enums/page-action";
 import {UserRole} from "../../../shared/enums/user-role";
 import {BaseComponent} from "../../../shared/components/base.component";
 import {IGrade} from "../../../shared/interfaces/grade-data";
+import {ToastTypeEnum} from "../../../shared/enums/toast-type";
 
 @Injectable({providedIn: 'root'})
 export class UniversityAuthorityService extends BaseComponent {
@@ -81,18 +82,20 @@ export class UniversityAuthorityService extends BaseComponent {
       template,
       name,
       date: this.sharedService.getTwoDigitNumber(new Date().getDate()) + '.' + this.sharedService.getTwoDigitNumber(Number(new Date().getMonth() + 1)) + '.' + new Date().getFullYear()
-    })
+    }).then(() => {
+      this.sharedService.presentToast('Довідку успішно збережено', ToastTypeEnum.Success);
+    });
   }
 
   saveUser(user: IUserInfo, action: string) {
     if (action === PageAction.Create) {
       this.fireStore.collection('user-info').doc(user.uid).set(user).then(() => {
-            //this.sharedService.presentToast('Please fill all the required fields');
+        this.sharedService.presentToast('Зміни користувача успішно збережено', ToastTypeEnum.Success);
       });
     } else {
       this.fireStore.collection('user-info').doc(user.uid).update(user).then(() => {
-        //this.sharedService.presentToast('Please fill all the required fields');
-        });
+        this.sharedService.presentToast('Зміни користувача успішно збережено', ToastTypeEnum.Success);
+      });
     }
   }
 
@@ -125,6 +128,7 @@ export class UniversityAuthorityService extends BaseComponent {
           gradesArray: gradesArray,
         }).then(() => {
           this.isLoading = false;
+          this.sharedService.presentToast('Дисципліну успішно додано', ToastTypeEnum.Success);
         });
       });
     } else {
@@ -140,6 +144,7 @@ export class UniversityAuthorityService extends BaseComponent {
           gradesArray: gradesArray,
         }).then(() => {
           this.isLoading = false;
+          this.sharedService.presentToast('Дисципліну успішно додано', ToastTypeEnum.Success);
         });
       }
       return;

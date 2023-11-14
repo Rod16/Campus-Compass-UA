@@ -8,6 +8,7 @@ import {UntypedFormBuilder, Validators} from "@angular/forms";
 import {Role} from "../enums/role"
 import {PageAction} from "../enums/page-action";
 import {UserRole} from "../../../shared/enums/user-role";
+import {ToastTypeEnum} from "../../../shared/enums/toast-type";
 
 @Component({
   selector: 'app-edit-user',
@@ -28,6 +29,8 @@ export class EditUserComponent extends BaseComponent implements OnInit {
     uid: [''],
   });
   public PageAction = PageAction;
+  protected readonly Role = Role;
+  protected readonly UserRole = UserRole;
 
   constructor(private route: ActivatedRoute, public sharedService: SharedService, public universityAuthorityService: UniversityAuthorityService, private fb: UntypedFormBuilder) {
     super();
@@ -69,7 +72,7 @@ export class EditUserComponent extends BaseComponent implements OnInit {
         birthDate: this.formatDatePickerValue(),
       }, this.action);
     } else {
-      //this.sharedService.presentToast('Please fill all the required fields');
+      this.sharedService.presentToast('Будь ласка, заповніть всі необхідні поля форми', ToastTypeEnum.Error);
     }
   }
 
@@ -88,7 +91,4 @@ export class EditUserComponent extends BaseComponent implements OnInit {
       this.userForm.removeControl('group');
     }
   }
-
-  protected readonly Role = Role;
-  protected readonly UserRole = UserRole;
 }

@@ -14,7 +14,9 @@ export class TeacherService {
 
   updateGrades(subjectData: ISubjectData) {
     const documentKey = `${subjectData.teacher.university}-${subjectData.teacher.uid}-${subjectData.subject}-${subjectData.course}`;
-    return this.fireStore.collection('teacher-student-connections').doc(documentKey).update(subjectData);
+    return this.fireStore.collection('teacher-student-connections').doc(documentKey).update(subjectData).then(() => {
+      this.sharedService.presentToast('Оцінки успішно оновлено', ToastTypeEnum.Success);
+    });
   }
 
   getTeacherSubjects(teacher: IUserInfo): Observable<ISubjectData[]> {

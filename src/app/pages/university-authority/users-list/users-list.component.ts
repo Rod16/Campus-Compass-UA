@@ -17,6 +17,7 @@ export class UsersListComponent extends BaseComponent implements OnInit {
   public userInfo!: IUserInfo;
   public usersArray: IUserInfo[] = [];
   public searchTerm = this.fb.control('');
+  protected readonly UserRole = UserRole;
 
   constructor(private route: ActivatedRoute, public sharedService: SharedService, public universityAuthorityService: UniversityAuthorityService, private fb: UntypedFormBuilder) {
     super();
@@ -38,6 +39,4 @@ export class UsersListComponent extends BaseComponent implements OnInit {
       this.usersArray = usersArray;
     });
   }
-
-  protected readonly UserRole = UserRole;
 }

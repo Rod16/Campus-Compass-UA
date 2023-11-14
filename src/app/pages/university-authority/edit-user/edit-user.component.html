@@ -7,15 +7,24 @@
     <ion-card>
       <ion-card-content>
         <div class="mb-1">
-          <ion-label class="l1 text-dark-grey">ПІБ</ion-label>
+          <ion-label class="l1 text-dark-grey">
+            <span class="me-1">ПІБ</span>
+            <span class="text-danger">*</span>
+          </ion-label>
           <ion-input formControlName="name" type="text" class="text-input" label="" placeholder="Залужний Валерій Федорович"></ion-input>
         </div>
         <div class="mb-1">
-          <ion-label class="l1 text-dark-grey">Email</ion-label>
+          <ion-label class="l1 text-dark-grey">
+            <span class="me-1">Email</span>
+            <span class="text-danger">*</span>
+          </ion-label>
           <ion-input formControlName="email" type="email" class="text-input" label="" placeholder="example@example.com"></ion-input>
         </div>
         <div class="mb-1" *ngIf="userForm.get('role')?.value !== UserRole.InstitutionRepresentative && userForm.get('role')?.value !== UserRole.UniversityAuthority">
-          <ion-label class="l1 text-dark-grey">Дата народження</ion-label>
+          <ion-label class="l1 text-dark-grey">
+            <span class="me-1">Дата народження</span>
+            <span class="text-danger">*</span>
+          </ion-label>
           <ion-datetime (ionChange)="formatDatePickerValue()" formControlName="birthDate" presentation="date" [preferWheel]="true"></ion-datetime>
         </div>
         <div *ngIf="!userInfo.faculty" class="mb-1">
@@ -23,7 +32,10 @@
           <ion-input formControlName="faculty" type="text" class="text-input" label="" placeholder="ФІОТ"></ion-input>
         </div>
         <div class="mb-1">
-          <ion-label class="l1 text-dark-grey">Роль в системі</ion-label>
+          <ion-label class="l1 text-dark-grey">
+            <span class="me-1">Роль в системі</span>
+            <span class="text-danger">*</span>
+          </ion-label>
           <div>
             <ion-radio-group formControlName="role" (ionChange)="roleChange($any($event))" class="d-flex flex-column gap-1" style="width: 200px">
               <ion-radio [value]="Role.Student" labelPlacement="end" class="l2" justify="start">Студент</ion-radio>
@@ -33,12 +45,18 @@
         </div>
         <div *ngIf="userForm.get('role')?.value === Role.Student">
           <div class="mb-1">
-            <ion-label class="l1 text-dark-grey">Курс</ion-label>
-            <ion-input formControlName="course" type="number" class="text-input" label="" placeholder="2"></ion-input>
+            <ion-label class="l1 text-dark-grey">
+              <span class="me-1">Курс</span>
+              <span class="text-danger">*</span>
+            </ion-label>
+            <ion-input [required]="true" formControlName="course" type="number" class="text-input" label="" placeholder="2"></ion-input>
           </div>
           <div class="mb-1">
-            <ion-label class="l1 text-dark-grey">Група</ion-label>
-            <ion-input formControlName="group" type="text" class="text-input" label="" placeholder="ІО-81"></ion-input>
+            <ion-label class="l1 text-dark-grey">
+              <span class="me-1">Група</span>
+              <span class="text-danger">*</span>
+            </ion-label>
+            <ion-input [required]="true" formControlName="group" type="text" class="text-input" label="" placeholder="ІО-81"></ion-input>
           </div>
         </div>
       </ion-card-content>

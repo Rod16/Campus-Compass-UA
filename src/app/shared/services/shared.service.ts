@@ -37,7 +37,9 @@ export class SharedService {
   }
 
   signOut(): void {
-    this.router.navigate(["/authorisation"]);
+    this.router.navigate(["/authorisation"]).then(() => {
+      this.presentToast('Ви успішно вийшли з акаунту', ToastTypeEnum.Success)
+    });
   }
 
   generateRandomId(): void {

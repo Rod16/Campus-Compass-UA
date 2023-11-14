@@ -45,9 +45,7 @@ export class SetGradeComponent extends BaseComponent implements OnInit {
       item.mark = this.formControlsArray[index].value;
     })
     this.subjectData.gradesArray[this.studentDataIndex] = this.studentData;
-    this.teacherService.updateGrades(this.subjectData).then(() => {
-      this.sharedService.presentToast('Оцінки успішно оновлено', ToastTypeEnum.Success);
-    })
+    this.teacherService.updateGrades(this.subjectData)
   }
 
 }
